@@ -16,5 +16,5 @@ spring:
   freemarker:
     enabled: true
 logging:
-  level:
+  level:                
     org.springframework: debug
