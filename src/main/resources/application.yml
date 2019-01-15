@@ -2,9 +2,9 @@ spring:
   application:
     name: XXX
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/jaux
-    username: spnor
-    password: kezhijs87858389
+    url: jdbc:mysql://45.63.55.57:3306/jaux
+    username: jauxdb
+    password: jauxdb@P123
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
