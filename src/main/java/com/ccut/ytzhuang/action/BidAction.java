@@ -14,6 +14,7 @@ import com.ccut.ytzhuang.service.BidService;
 import com.ccut.ytzhuang.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,39 +27,11 @@ public class BidAction {
     
     @Autowired
     private BidService bidService;
-    private static final long serialVersionUID = 2495498540796769368L;
-    private String bidid;
-    private String username;
+
     private Goods goods = new Goods();
     
     @Autowired
     private GoodsService goodsService;
-    private Double prices;
-
-    public String getBidid() {
-        return bidid;
-    }
-
-    public void setBidid(String bidid) {
-        this.bidid = bidid;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-
-    public Double getPrices() {
-        return prices;
-    }
-
-    public void setPrices(Double prices) {
-        this.prices = prices;
-    }
 
     //添加新订单
     @PostMapping(value = "add")
@@ -139,8 +112,8 @@ public class BidAction {
         //修改商品状态
         goods = goodsService.getGoodsByid("");
         //商品的拍卖价格
-        goods.setBidPrice(prices);
-        bid.setPrice(prices);
+        goods.setBidPrice(0D);
+        bid.setPrice(0D);
         System.out.println(goods);
         if (goods.getEndTime().getTime() > date.getTime()) {
             bid.setBidState("正在拍卖");
@@ -167,7 +140,7 @@ public class BidAction {
 
     //取消订单
     @GetMapping(value = "cancel")
-    public String cancel() {
+    public String cancel(String bidid) {
         Bid bid = bidService.getBidById(bidid);
         bid.setBidState("订单取消");
         System.out.println(bid.getBidState());
@@ -183,7 +156,7 @@ public class BidAction {
     //修改订单
     @PostMapping(value = "modify")
     public String modify(HttpServletRequest request) {
-        Bid bid = bidService.getBidById(bidid);
+        Bid bid = bidService.getBidById("");
         if (bid != null) {
             request.getSession().setAttribute("bid_mod", bid);
             return "Bid_modify_success";
@@ -206,7 +179,7 @@ public class BidAction {
 
     //删除订单
     @PostMapping(value = "delete")
-    public String delete() {
+    public String delete(String bidid) {
         if (bidService.delete(bidid)) {
             System.out.println("订单删除成功");
             return "Bid_delete_success";
@@ -226,8 +199,7 @@ public class BidAction {
 
     //查询我的订单
     @GetMapping(value = "search")
-    public String search(HttpServletRequest request) {
-        System.out.println(username);
+    public String search(String userName, Model model) {
 //		System.out.println(bid.getBid_id());
 //		Date date = null;
 //		
@@ -249,9 +221,9 @@ public class BidAction {
 //		bidService.save(bid);
 //		GoodsServiceImpl.save(goods);
 //		
-        List<Bid> list = bidService.search(username);
+        List<Bid> list = bidService.search(userName);
         list.size();
-        request.getSession().setAttribute("bid_list", list);
+        model.addAttribute("bid_list", list);
         return "Bid_search_success";
     }
 

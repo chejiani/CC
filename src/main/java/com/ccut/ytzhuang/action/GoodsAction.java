@@ -1,112 +1,56 @@
 package com.ccut.ytzhuang.action;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ccut.ytzhuang.model.Goods;
 import com.ccut.ytzhuang.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 商品页面基本操作，商显示，查询，详细信息，竞拍
+ */
 @Controller
 @RequestMapping(value = "goods")
 public class GoodsAction {
 
-    private Goods goods = new Goods();
-    private static final long serialVersionUID = 2495498540796769368L;
-
     @Autowired
-    private GoodsService GoodsServiceImpl;
-    private String goodsid;
-    private String goodsname;
-    private File upload;
-    private String uploadContentType;
-    private String uploadFileName;
-    private String savePath;
-    private String ownerName;
+    private GoodsService goodsService;
 
     public String getSavePath(HttpServletRequest request) {
         return request.getServletContext().getRealPath("\\");
     }
 
-    public void setSavePath(String value) {
-        this.savePath = value;
-    }
-
-    public File getUpload() {
-        return upload;
-    }
-
-    public void setUpload(File upload) {
-        this.upload = upload;
-    }
-
-    public String getUploadContentType() {
-        return uploadContentType;
-    }
-
-    public void setUploadContentType(String uploadContentType) {
-        this.uploadContentType = uploadContentType;
-    }
-
-    public String getUploadFileName() {
-        return uploadFileName;
-    }
-
-    public void setUploadFileName(String uploadFileName) {
-        this.uploadFileName = uploadFileName;
-    }
-
-    public String getGoodsid() {
-        return goodsid;
-    }
-
-    public void setGoodsid(String goodsid) {
-        this.goodsid = goodsid;
-    }
-
-    public String getGoodsname() {
-        return goodsname;
-    }
-
-    public void setGoodsname(String goodsname) {
-        this.goodsname = goodsname;
-    }
-
-    public String getOwnerName() {
-        return ownerName;
-    }
-
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
-    }
-
-    //获取所以商品
+    /**
+     * 获取所以商品
+     *
+     * @param name
+     * @param model
+     * @return
+     */
     @GetMapping(value = "query")
-    public String query(HttpServletRequest request) {
-//		ArrayList<Goods>list = GoodsServiceImpl.getGoodsByName(ownerName);
-        List<Goods> list = GoodsServiceImpl.getAllGoods();
-        request.getSession().setAttribute("goodsList", list);
+    public String query(String name, Model model) {
+        List<Goods> list = goodsService.getGoodsByName(name);
+        model.addAttribute("goodsList", list);
         return "Goods_query_success";
     }
 
     //我的拍卖
     @GetMapping(value = "myGoods")
     public String myGoods(HttpServletRequest request) {
-        List<Goods> list = GoodsServiceImpl.getGoodsByName(ownerName);
-        request.getSession().setAttribute("mygoods", list);
+//        List<Goods> list = goodsService;
+//        request.getSession().setAttribute("mygoods", list);
         return "Goods_myGoods_success";
     }
 
@@ -134,7 +78,7 @@ public class GoodsAction {
     //添加商品
     @PostMapping(value = "add")
     public String add(HttpServletRequest request) {
-        try {
+        /*try {
             FileOutputStream fos = new FileOutputStream(getSavePath(request)
                     + "\\" + getUploadFileName());
             FileInputStream fis = new FileInputStream(getUpload());
@@ -170,12 +114,13 @@ public class GoodsAction {
         } else {
             System.out.println("添加失败");
             return "Goods_add_failure";
-        }
+        }*/
+        return "";
     }
 
     @PostMapping(value = "modify")
     public String modify(HttpServletRequest request) {
-        System.out.println(goodsid);
+        /*System.out.println(goodsid);
         Goods goods = GoodsServiceImpl.getGoodsByid(goodsid);
         System.out.println("1234" + goods);
         if (goods != null) {
@@ -183,13 +128,14 @@ public class GoodsAction {
             return "Goods_modify_success";
         } else {
             return "Goods_modify_failure";
-        }
+        }*/
+        return "";
     }
 
     //保存修改后的商品资料
     @PostMapping(value = "save")
     public String save() {
-        System.out.println("4321" + goods);
+        /*System.out.println("4321" + goods);
         state(goods);
         if (GoodsServiceImpl.save(goods)) {
             System.out.println("修改成功");
@@ -197,30 +143,32 @@ public class GoodsAction {
         } else {
             System.out.println("修改失败");
             return "Goods_save_failure";
-        }
+        }*/
+        return "";
     }
 
     //删除商品
     @PostMapping(value = "delete")
     public String delete() {
-        if (GoodsServiceImpl.delete(goodsid)) {
+        /*if (GoodsServiceImpl.delete(goodsid)) {
             System.out.println("删除成功");
             return "Goods_delete_success";
         } else {
             System.out.println("删除失败");
             return "Goods_delete_failure";
-        }
+        }*/
+        return "";
     }
 
     //搜索功能
     @GetMapping(value = "search")
     public String search(HttpServletRequest request) {
-        request.getSession().setAttribute("search_list", null);
+        /*request.getSession().setAttribute("search_list", null);
         List<Goods> list = GoodsServiceImpl.search(goodsname);
         System.out.println(list);
-        /*
+        *//*
          * 	在查询结果中找到商品的id，并通过id找到商品，然后实时更改商品状态
-         */
+         *//*
         if (list.size() != 0) {
             System.out.println("111111" + list.toString().split(",")[0].split("=")[1]);
             String id = list.toString().split(",")[0].split("=")[1];
@@ -231,13 +179,13 @@ public class GoodsAction {
             //修改后需要提交事务
             GoodsServiceImpl.save(goods);
             request.getSession().setAttribute("search_list", goods);
-        }
+        }*/
         return "Goods_search_success";
     }
 
     @GetMapping(value = "detail")
     public String detail(HttpServletRequest request) {
-        System.out.println(goodsid);
+        /*System.out.println(goodsid);
         Goods goods = GoodsServiceImpl.getGoodsByid(goodsid);
 
         if (goods != null) {
@@ -250,7 +198,8 @@ public class GoodsAction {
             return "Goods_detail_success";
         } else {
             return "Goods_detail_failure";
-        }
+        }*/
+        return "";
     }
 
 }

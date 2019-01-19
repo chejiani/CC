@@ -9,8 +9,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 public interface GoodsDao extends JpaRepository<Goods, Long>, PagingAndSortingRepository<Goods, Long> {
 
     //根据商品编号查询商品信息
-    public Goods findByGoodsId(String goods_id);
+    Goods findByGoodsId(String goods_id);
 
     //更具商品编号查询商品信息
-    public ArrayList<Goods> findGoodsByGoodsNameLike(String ownerName);
+    ArrayList<Goods> findGoodsByGoodsNameLike(String ownerName);
 }

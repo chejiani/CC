@@ -42,13 +42,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED)
-    public boolean save(User user) {
-        userDao.save(user);
-        return true;
-    }
-
-    @Override
     public boolean userLogin(User user) {
         return true;
     }

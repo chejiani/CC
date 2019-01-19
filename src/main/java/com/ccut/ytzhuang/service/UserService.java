@@ -16,6 +16,4 @@ public interface UserService {
 	public boolean add(User user);
 	//根据学号查询学生
 	public User getUserByid(String user_id);
-	//修改学生资料
-	public boolean save(User user);
 }

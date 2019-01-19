@@ -1,7 +1,5 @@
 package com.ccut.ytzhuang.action;
 
-import javax.annotation.Resource;
-
 import com.ccut.ytzhuang.model.Admin;
 
 import com.ccut.ytzhuang.service.AdminService;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "admin")
 public class AdminAction {
 
-    private static final long serialVersionUID = -908535071723215482L;
     private Admin admin = new Admin();
 
     @Autowired
