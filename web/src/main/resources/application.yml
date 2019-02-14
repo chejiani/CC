@@ -22,5 +22,6 @@ spring:
 logging:
   level:
     org.apache: info
+    org.springframework: debug
 server:
   port: 8888

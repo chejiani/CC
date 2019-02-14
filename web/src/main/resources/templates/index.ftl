@@ -8,10 +8,10 @@
 
     <title>首页</title>
 
-    <link href="${ctx}css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <header>
