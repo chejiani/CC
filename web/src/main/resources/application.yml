@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: XXX
+  datasource:
+    url: jdbc:mysql://localhost:3306/cjn
+    username: root
+    password: spnor87858389
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: edu.jxau.cjn.config.DefaultPhysicalNamingStrategy
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+  main:
+    web-application-type: servlet
+  freemarker:
+    enabled: true
+    request-context-attribute: request
+logging:
+  level:
+    org.apache: info
+server:
+  port: 8888
