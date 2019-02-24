@@ -6,26 +6,13 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>易拍</title>
-    <link href="${ctx}css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<header>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">易拍</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="#">我的购物车</a>
-            <a class="p-2 text-dark" href="#">客服</a>
-        </nav>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="搜索关键字" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">找找看</button>
-        </form>
-        <a class="btn btn-link text-justify text-info" href="#">登陆</a>
-    </div>
-</header>
+<#include '../common/nav.ftl'>
 <main role="main">
     <div class="container-fluid">
         <div class="row pl-xl-5">
@@ -512,15 +499,10 @@
         </div>
     </div>
 </main>
-<footer class="footer mt-auto py-3">
-    <hr/>
-    <div class="container text-center">
-        Copyright © 2008-2019 The JXAU.EDU.CN
-    </div>
-</footer>
+<#include '../common/footer.ftl'>
 </body>
-<script src="${ctx}js/jquery-3.1.1.min.js"></script>
-<script src="${ctx}js/bootstrap.min.js"></script>
-<script src="${ctx}js/bootstrap.bundle.min.js"></script>
-<script src="${ctx}js/cjn.js"></script>
+<script src="${ctx}/js/jquery-3.1.1.min.js"></script>
+<script src="${ctx}/js/bootstrap.min.js"></script>
+<script src="${ctx}/js/bootstrap.bundle.min.js"></script>
+<script src="${ctx}/js/cjn.js"></script>
 </html>

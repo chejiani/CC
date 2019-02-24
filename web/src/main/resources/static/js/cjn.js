@@ -17,7 +17,7 @@
             layerBgc: '#000', // 遮罩背景颜色
             showPanelW: 500, // 显示放大区域宽
             showPanelH: 500, // 显示放大区域高
-            marginL: 5, // 放大区域离缩略图右侧距离
+            marginL: 10, // 放大区域离缩略图右侧距离
             marginT: 0 // 放大区域离缩略图上侧距离
         };
 

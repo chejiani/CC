@@ -1,7 +1,7 @@
 package edu.jxau.cjn.config.security;
 
-import edu.jxau.cjn.model.User;
-import edu.jxau.cjn.service.UserService;
+import edu.jxau.cjn.infrastructure.entity.User;
+import edu.jxau.cjn.service.user.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -31,7 +31,7 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        User user = userService.getUserByid(((ShiroUser)token.getPrincipal()).id);
+        User user = userService.getUserByUserName(((ShiroUser)token.getPrincipal()).id);
         if (user == null) {
             return null;
         }

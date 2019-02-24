@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>edu.jxau</groupId>
-            <artifactId>infrastructure</artifactId>
+            <artifactId>service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

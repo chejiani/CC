@@ -1,11 +1,10 @@
 package edu.jxau.cjn.controller;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.entity.StringEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpRequest;
+import edu.jxau.cjn.infrastructure.entity.Goods;
+import edu.jxau.cjn.service.goods.GoodsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class HomeController {
 
-    private static Logger logger = LoggerFactory.getLogger(HomeController.class);
+    @Autowired
+    private GoodsService goodsService;
 
-    @GetMapping(value = "index")
-    public String index(){
+    @GetMapping(value = {"index", "/"})
+    public String index(Model model){
+        model.addAttribute("goodsList", goodsService.getAlL());
         return "index";
     }
 
@@ -29,17 +30,13 @@ public class HomeController {
     }
 
     @GetMapping(value = "details/{id}")
-    public String detail(@PathVariable(value = "id") String id){
-        return "goods/detail";
-    }
-
-    @PostMapping(value = "put")
-    public void put(HttpServletRequest request, HttpServletResponse response){
-        try {
-            Thread.sleep(4000);
-            response.getOutputStream().print("12345678iu,jhmgfvcsawq234565jyr");
-        } catch (Exception e){
-            e.printStackTrace();
+    public String detail(@PathVariable(value = "id") String id, Model model){
+        Goods goods = goodsService.getOne(Long.valueOf(id));
+        if (goods == null){
+             return "redirect:404";
+        } else {
+            model.addAttribute("goods", goodsService.getOne(Long.valueOf(id)));
+            return "goods/detail";
         }
     }
 

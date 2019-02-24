@@ -10,7 +10,7 @@ spring:
     hibernate:
       ddl-auto: update
       naming:
-        physical-strategy: edu.jxau.cjn.config.DefaultPhysicalNamingStrategy
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
@@ -19,6 +19,16 @@ spring:
   freemarker:
     enabled: true
     request-context-attribute: request
+  http:
+    converters:
+      preferred-json-mapper: jackson
+  resources:
+    static-locations:
+      - classpath:/resources/
+      - classpath:/static/
+      - classpath:/public/
+      - classpath:/META-INF/resources/
+      - file:d://upload/
 logging:
   level:
     org.apache: info

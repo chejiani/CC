@@ -7,33 +7,21 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>易拍</title>
     <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="${ctx}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/css/bootstrap-grid.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/css/bootstrap-reboot.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<header>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-        <h5 class="my-0 mr-md-auto font-weight-normal">易拍</h5>
-        <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="#">我的购物车</a>
-            <a class="p-2 text-dark" href="#">客服</a>
-        </nav>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="搜索关键字" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">找找看</button>
-        </form>
-        <a class="btn btn-link text-justify text-info" href="#">登陆</a>
-    </div>
-</header>
+<#include '../common/nav.ftl'>
 <main role="main">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <#-- 图片展示区 -->
             <div class="col-4 justify-content-center shadow-lg">
-                <div class="m-5 bg-transparent">
-                    <div class="show border border-info" href="${ctx}/asset/1.svg">
-                        <img src="${ctx}/asset/1.svg" id="show-img" style="object-fit: cover">
+                <div class="p-5 bg-transparent">
+                    <div class="show" href="${ctx}/asset/1.svg">
+                        <img src="${ctx}/asset/1.svg" id="show-img">
                     </div>
                     <div class="small-img">
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
@@ -42,8 +30,10 @@
                                 <img src="${ctx}/asset/1.svg" class="show-small-img" alt="">
                                 <img src="${ctx}/asset/22.svg" class="show-small-img" alt="">
                                 <img src="${ctx}/asset/333.svg" class="show-small-img" alt="">
-                                <img src="${ctx}/asset/39b91372-ce23-4be1-9188-37d5418bafdf.png" class="show-small-img" alt="">
-                                <img src="${ctx}/asset/220572b5-d462-4ed2-8a48-c77695faf10a.png" class="show-small-img" alt="">
+                                <img src="${ctx}/asset/39b91372-ce23-4be1-9188-37d5418bafdf.png" class="show-small-img"
+                                     alt="">
+                                <img src="${ctx}/asset/220572b5-d462-4ed2-8a48-c77695faf10a.png" class="show-small-img"
+                                     alt="">
                             </div>
                         </div>
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">
@@ -51,32 +41,82 @@
                 </div>
             </div>
             <#-- 价格简介区 -->
-            <div class="col-5">
+            <div class="col-4">
                 <div class="m-5">
-                    江西农业大学-5毛甩卖
+                    <div class="card w-75">
+                        <div class="card-body">
+                            <h4 class="card-title">${goods.goodsName}</h4>
+                            <p class="card-text text-info">${goods.goodsDesc}</p>
+                            <div>
+                                <hr/>
+                                <div class="bg-transparent">
+                                    <div>
+                                        <h6 class="text-dark">当前竞拍信息:</h6>
+                                        <table class="table">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">底价</th>
+                                                <th scope="col">当前出价</th>
+                                                <th scope="col">竞拍人数</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>${goods.reservePrice}</td>
+                                                <td class="text-danger">135.00</td>
+                                                <td>3</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="bg-transparent">
+                                    <h6 class="text-dark">一口价:<span class="text-danger">${goods.fixedPrice}</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="btn-group justify-content-between align-items-center float-right" role="group">
+                                <button type="button" id="bid_click" goods_no="${goods.goodsId}"
+                                        class="btn btn-lg btn-outline-dark p-1">叫价
+                                </button>
+                                <a type="button" href="/order/create/${goods.goodsId}" class="btn btn-lg btn-success p-1">
+                                    买入
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <hr/>
         <#-- 详细信息区 -->
-        <div class="row">
-            <div class="text-center">
-                <p>
-                    sdfghjkl;'
-                </p>
+        <div class="row justify-content-center">
+            <div class="col-9">
+                ${goods.article}
             </div>
         </div>
     </div>
 </main>
-<footer class="footer mt-auto py-3">
-    <hr/>
-    <div class="container text-center">
-        Copyright © 2008-2019 The JXAU.EDU.CN
-    </div>
-</footer>
+<#include '../common/footer.ftl'>
 </body>
 <script src="${ctx}/js/jquery-3.1.1.min.js"></script>
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
+<script>
+    $(function () {
+        $('#bid_click').click(function () {
+            var goods = $(this).attr('good_no');
+            $.get('${ctx}', {id: goods}, function (data) {
+                var newPrice = prompt("输入本轮出价:", "");
+                if (newPrice > "") {
+                    $.post('', {id: goods}, function (data) {
+
+                    })
+                }
+            })
+        });
+    })
+</script>
 </html>
