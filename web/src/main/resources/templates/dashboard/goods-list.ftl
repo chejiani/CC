@@ -60,7 +60,7 @@
 <script src="${ctx}/js/cjn.js"></script>
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
-        var html = "<a href='#' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>";
+        var html = "<a href='${ctx}/details/"+row.goodsId+"' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>"
         html += "<a href='#' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>";
         html += "<a href='#' class='btn btn-default'><i class='fas fa-times'></i> 删除</a>";
         return html;
