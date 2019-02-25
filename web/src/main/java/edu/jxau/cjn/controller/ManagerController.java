@@ -19,7 +19,7 @@ public class ManagerController {
     @Autowired
     private GoodsService goodsService;
 
-    @GetMapping(value = {"index", "/"})
+    @GetMapping(value = {"index", ""})
     public String dashboard(){
         return "dashboard/index";
     }

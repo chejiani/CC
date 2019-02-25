@@ -52,6 +52,17 @@ public class Order implements Serializable {
     @Column(precision = 12, scale = 2)
     private int orderStatus;
 
+    @Column(length = 200)
+    private String addr;
+
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
     public long getId() {
         return id;
     }

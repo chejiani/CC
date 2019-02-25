@@ -14,7 +14,6 @@
     <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/wangEditor/wangEditor.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/bootstrap-fileinput/themes/theme.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <#include '../common/nav-dashboard.ftl'>
@@ -33,9 +32,7 @@
                             <div class="mb-3">
                                 <label for="username">商品标题</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="goodsName" id="username"
-                                           placeholder="Username"
-                                           required="">
+                                    <input type="text" class="form-control" name="goodsName" id="username">
                                     <div class="invalid-feedback" style="width: 100%;">
                                         Your username is required.
                                     </div>
@@ -102,8 +99,8 @@
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/wangEditor/wangEditor.min.js"></script>
 <script src="${ctx}/bootstrap-fileinput/js/fileinput.min.js"></script>
-<script src="${ctx}/bootstrap-fileinput/js/locales/zh.js"></script>
 <script src="${ctx}/bootstrap-fileinput/themes/theme.min.js"></script>
+<script src="${ctx}/bootstrap-fileinput/js/locales/zh.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
 <script>
     var E = window.wangEditor;
@@ -111,7 +108,6 @@
     editor.customConfig.uploadImgServer = '${ctx}/upload/article';
     editor.customConfig.uploadImgMaxLength = 5;
     editor.create();
-
     function submit_click() {
         $('#editor-input').val(editor.txt.html());
         $('#goods-form').submit();
@@ -121,6 +117,7 @@
         language: "zh",
         showCaption: false,
         allowedFileTypes: ['image'],
+        theme: "fa",
         allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
         uploadUrl: '${ctx}/upload/image'
     }).on('fileuploaded', function (event, data, previewId, index) {

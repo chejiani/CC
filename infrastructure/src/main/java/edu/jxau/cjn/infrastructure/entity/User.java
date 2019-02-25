@@ -2,6 +2,7 @@ package edu.jxau.cjn.infrastructure.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "JAUX_USER")
@@ -29,9 +30,36 @@ public class User implements Serializable {
     @Column(length = 100)
     private String address;
 
+    @Column(nullable = false)
+    private String salt;
+
+    @Column(nullable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDateTime = new Date();
+
+    @Column(nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updateDateTime;
+
+    @Column
+    private boolean disable;
+
     @ManyToOne
     @JoinColumn(name = "roleId",nullable = false, updatable = false)
     private Role role;
+
+    @PreUpdate
+    public void preUpdate(){
+        this.updateDateTime = new Date();
+    }
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
 
     public long getUserId() {
         return userId;
@@ -95,5 +123,29 @@ public class User implements Serializable {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+
+    public Date getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(Date createDateTime) {
+        this.createDateTime = createDateTime;
+    }
+
+    public Date getUpdateDateTime() {
+        return updateDateTime;
+    }
+
+    public void setUpdateDateTime(Date updateDateTime) {
+        this.updateDateTime = updateDateTime;
     }
 }

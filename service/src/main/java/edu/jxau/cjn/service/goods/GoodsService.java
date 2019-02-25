@@ -5,12 +5,15 @@ import edu.jxau.cjn.infrastructure.entity.Album;
 import edu.jxau.cjn.infrastructure.entity.Goods;
 import edu.jxau.cjn.infrastructure.repositories.AlbumRepository;
 import edu.jxau.cjn.infrastructure.repositories.GoodsRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GoodsService {
@@ -26,10 +29,16 @@ public class GoodsService {
 
     public boolean save(Goods goods, String[] pics){
         try {
-            Album album = new Album();
-            album.setPicAddr(objectMapper.writeValueAsString(pics));
-            albumRepository.save(album);
-            goods.setAlbum(album);
+            List<String> pic = Arrays.stream(pics)
+                    .filter(StringUtils::isNoneBlank)
+                    .map(item -> item.substring(item.lastIndexOf("\\") + 1))
+                    .collect(Collectors.toList());
+            if (pic != null){
+                Album album = new Album();
+                album.setPicAddr(objectMapper.writeValueAsString(pic));
+                albumRepository.save(album);
+                goods.setAlbum(album);
+            }
             goods = goodsRepository.save(goods);
             return goods != null;
         } catch (Exception e){
@@ -43,6 +52,15 @@ public class GoodsService {
 
     public Goods getOne(long id){
         return goodsRepository.getOne(id);
+    }
+
+    public Goods goodsAuctionAvailable(long id){
+        Goods goods = goodsRepository.getOne(id);
+        if (goods != null && goods.getStock() > 0 && goods.isAuction() && !goods.isObtained()){
+            return goods;
+        } else {
+            return null;
+        }
     }
 
     public List<Goods> getAlL(){

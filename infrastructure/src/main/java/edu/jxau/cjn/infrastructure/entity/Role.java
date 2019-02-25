@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "JAUX_ROLE")
 public class Role implements Serializable {
-    
+
     private static final long serialVersionUID = 0L;
 
     @Id
@@ -19,6 +19,9 @@ public class Role implements Serializable {
 
     @Column(length = 20)
     private String description;
+
+    @Column(nullable = false)
+    private boolean preset;
 
     public int getId() {
         return id;
@@ -42,5 +45,13 @@ public class Role implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public boolean isPreset() {
+        return preset;
+    }
+
+    public void setPreset(boolean preset) {
+        this.preset = preset;
     }
 }

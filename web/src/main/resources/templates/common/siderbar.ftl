@@ -19,6 +19,18 @@
                     商品
                 </a>
             </li>
+            <li class="nav-item border-bottom nav-hover">
+                <a class="nav-link" href="${ctx}/user/manage/list/user">
+                    <i class="fas fa-user fa-lg"></i>
+                    用户
+                </a>
+            </li>
+            <li class="nav-item border-bottom nav-hover">
+                <a class="nav-link" href="${ctx}/user/manager/list/role">
+                    <i class="fas fa-prescription fa-lg"></i>
+                    角色
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

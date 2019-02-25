@@ -59,13 +59,13 @@ public class Goods implements Serializable {
      * 允许竞拍
      */
     @Column(updatable = false)
-    private boolean isAuction;
+    private boolean auction;
 
     /**
      * 允许一口价
      */
     @Column(updatable = false)
-    private boolean isFixed;
+    private boolean fixed;
 
     /**
      * 商品所有者
@@ -77,7 +77,7 @@ public class Goods implements Serializable {
      * 是否下架
      */
     @Column
-    private boolean isObtained;
+    private boolean obtained;
 
     /**
      * 库存
@@ -150,19 +150,19 @@ public class Goods implements Serializable {
     }
 
     public boolean isAuction() {
-        return isAuction;
+        return auction;
     }
 
     public void setAuction(boolean auction) {
-        isAuction = auction;
+        this.auction = auction;
     }
 
     public boolean isFixed() {
-        return isFixed;
+        return fixed;
     }
 
     public void setFixed(boolean fixed) {
-        isFixed = fixed;
+        this.fixed = fixed;
     }
 
     public User getOwner() {
@@ -174,11 +174,11 @@ public class Goods implements Serializable {
     }
 
     public boolean isObtained() {
-        return isObtained;
+        return obtained;
     }
 
     public void setObtained(boolean obtained) {
-        isObtained = obtained;
+        this.obtained = obtained;
     }
 
     public int getStock() {

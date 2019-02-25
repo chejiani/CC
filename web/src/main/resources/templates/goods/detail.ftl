@@ -21,19 +21,17 @@
             <div class="col-4 justify-content-center shadow-lg">
                 <div class="p-5 bg-transparent">
                     <div class="show" href="${ctx}/asset/1.svg">
-                        <img src="${ctx}/asset/1.svg" id="show-img">
+                        <#if albums??>
+                            <img src="${ctx}/${albums[0]}" id="show-img" alt="${albums[0]}">
+                        </#if>
                     </div>
                     <div class="small-img">
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
                         <div class="small-container">
                             <div id="small-img-roll">
-                                <img src="${ctx}/asset/1.svg" class="show-small-img" alt="">
-                                <img src="${ctx}/asset/22.svg" class="show-small-img" alt="">
-                                <img src="${ctx}/asset/333.svg" class="show-small-img" alt="">
-                                <img src="${ctx}/asset/39b91372-ce23-4be1-9188-37d5418bafdf.png" class="show-small-img"
-                                     alt="">
-                                <img src="${ctx}/asset/220572b5-d462-4ed2-8a48-c77695faf10a.png" class="show-small-img"
-                                     alt="">
+                                <#list albums as album>
+                                    <img src="${ctx}/${album}" class="show-small-img" alt="${album}">
+                                </#list>
                             </div>
                         </div>
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">
@@ -42,8 +40,8 @@
             </div>
             <#-- 价格简介区 -->
             <div class="col-4">
-                <div class="m-5">
-                    <div class="card w-75">
+                <div class="m-2">
+                    <div class="card w-100">
                         <div class="card-body">
                             <h4 class="card-title">${goods.goodsName}</h4>
                             <p class="card-text text-info">${goods.goodsDesc}</p>
@@ -92,7 +90,7 @@
         <hr/>
         <#-- 详细信息区 -->
         <div class="row justify-content-center">
-            <div class="col-9">
+            <div class="col-9 p-1 border">
                 ${goods.article}
             </div>
         </div>

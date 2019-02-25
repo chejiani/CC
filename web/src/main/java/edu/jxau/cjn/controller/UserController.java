@@ -1,5 +1,9 @@
 package edu.jxau.cjn.controller;
 
+import edu.jxau.cjn.infrastructure.entity.Role;
+import edu.jxau.cjn.infrastructure.entity.User;
+import edu.jxau.cjn.service.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +14,9 @@ import java.io.Serializable;
 @Controller
 @RequestMapping(value = "user")
 public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "login")
     public String login(){
@@ -23,7 +30,11 @@ public class UserController {
 
     @PostMapping(value = "register")
     public String register(User user){
-        return "redirect:/index";
+        if (userService.register(user)){
+            return "redirect:/index";
+        } else {
+            throw new RuntimeException("用户注册失败");
+        }
     }
 
     @GetMapping(value = "forget")
@@ -31,13 +42,24 @@ public class UserController {
         return "forget";
     }
 
-    private class User implements Serializable {
+    @GetMapping(value = "manage/list/user")
+    public String userList(){
+        return "dashboard/user-list";
+    }
 
-        public static final long serialVersionUID =  0L;
+    @GetMapping(value = "manager/list/role")
+    public String roleList(){
+        return "dashboard/role-list";
+    }
 
-        /* private String userName;
-        private String password;
-        private String phone; */
+    @PostMapping(value = "manager/add/role")
+    public Result addRole(Role role){
+        return new Result();
+    }
+
+    @GetMapping(value = "manager/add/role")
+    public String addRole(){
+        return "dashboard/add-role";
     }
 
 }

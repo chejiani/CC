@@ -25,13 +25,13 @@ public class UploadController {
 
     private String savePath = "d://upload/";
 
-    @Autowired
-    private ObjectMapper objectMapper;
-
     @PostMapping(value = "upload/image")
     @ResponseBody
-    public Map upload(MultipartFile multipartFile, HttpServletResponse response) {
+    public Map upload(MultipartFile multipartFile) {
         File file = new File(savePath + UUID.randomUUID().toString());
+        if (!file.getParentFile().exists()){
+            file.getParentFile().mkdirs();
+        }
         Map<String, Object> resp = new HashMap<>();
         try {
             multipartFile.transferTo(file);
@@ -48,13 +48,16 @@ public class UploadController {
         Map<String, Object> resp = new HashMap<>();
         try {
             File file = new File(savePath + UUID.randomUUID().toString());
+            if (!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
+            }
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             List<MultipartFile> fileList = new ArrayList<>(multipartRequest.getFileMap().values());
             List<String> filePathList = new LinkedList<>();
             for (MultipartFile mf : fileList) {
                 if (!mf.isEmpty()) {
                     mf.transferTo(file);
-                    filePathList.add(file.getName());
+                    filePathList.add("/" + file.getName());
                 }
             }
             resp.put("errno", 0);

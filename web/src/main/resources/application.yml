@@ -29,6 +29,9 @@ spring:
       - classpath:/public/
       - classpath:/META-INF/resources/
       - file:d://upload/
+  servlet:
+    multipart:
+      max-file-size: 20MB
 logging:
   level:
     org.apache: info
