@@ -18,11 +18,14 @@ public class User implements Serializable {
     @Column(length = 10)
     private String realName;
 
-    @Column(length = 16)
+    @Column(length = 48)
     private String password;
 
     @Column(length = 2)
     private String gender;
+
+    @Column
+    private String email;
 
     @Column(length = 14)
     private String mobile;
@@ -48,9 +51,23 @@ public class User implements Serializable {
     @JoinColumn(name = "roleId",nullable = false, updatable = false)
     private Role role;
 
-    @PreUpdate
+    @PrePersist
+    public void prePersist(){
+        this.createDateTime = new Date();
+        this.updateDateTime = new Date();
+    }
+
+    @PostUpdate
     public void preUpdate(){
         this.updateDateTime = new Date();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isDisable() {

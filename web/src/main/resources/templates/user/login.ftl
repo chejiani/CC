@@ -9,24 +9,24 @@
     <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body class="text-center login">
-<form class="form-signin">
+<form class="form-signin" method="post">
     <div class="text-center mb-4">
         <img class="mb-4" src="/docs/4.2/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
     </div>
 
     <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-        <label for="inputEmail">Email address</label>
+        <input type="text" id="inputEmail" class="form-control" name="username" placeholder="" required="" autofocus="">
+        <label for="inputEmail">用户</label>
     </div>
 
     <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required="">
         <label for="inputPassword">Password</label>
     </div>
 
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" value="remember-me"> Remember me
+            <input type="checkbox" value="remember-me" name="rememberMe"> Remember me
         </label>
         <label>
             <a href="/user/register" class="btn-link btn text-primary">没有账户</a>

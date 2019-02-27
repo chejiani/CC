@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    <title>404 - 找不到文件或目录。</title>
+    <title>403 - 禁止访问: 访问被拒绝。</title>
     <style type="text/css">
         <!--
         body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
@@ -21,9 +21,9 @@
 <div id="header"><h1>服务器错误</h1></div>
 <div id="content">
     <div class="content-container"><fieldset>
-            <h2>404 - 找不到文件或目录。</h2>
-            <h3>您要查找的资源可能已被删除，已更改名称或者暂时不可用。</h3>
-        </fieldset></div>
+        <h2>403 - 禁止访问: 访问被拒绝。</h2>
+        <h3>您无权使用所提供的凭据查看此目录或页面。</h3>
+    </fieldset></div>
 </div>
 </body>
 </html>

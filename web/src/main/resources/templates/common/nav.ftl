@@ -9,6 +9,6 @@
             <input class="form-control mr-sm-2" type="text" placeholder="搜索关键字" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">找找看</button>
         </form>
-        <a class="btn btn-link text-justify text-info" href="#">登陆</a>
+        <@login/>
     </div>
 </header>

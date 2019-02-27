@@ -14,7 +14,6 @@
     <link href="${ctx}/css/style.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/wangEditor/wangEditor.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet" type="text/css"/>
-    <link href="${ctx}/bootstrap-fileinput/themes/theme.min.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <#include '../common/nav-dashboard.ftl'>

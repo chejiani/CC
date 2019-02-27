@@ -15,10 +15,10 @@ public class ExceptionController implements ErrorController {
         return "404";
     }
 
-    @GetMapping(value = "503")
+    @GetMapping(value = "500")
     @ExceptionHandler(value = Exception.class)
-    public String e503(){
-        return "503";
+    public String e500(){
+        return "500";
     }
 
     @GetMapping(value = "error")

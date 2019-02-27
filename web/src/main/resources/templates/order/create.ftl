@@ -60,15 +60,15 @@
 
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="same-address">
-                        <label class="custom-control-label" for="same-address"><a href="#" class="text-danger">同意竞拍协议</a> </label>
+                        <input type="checkbox" class="custom-control-input" id="protocol">
+                        <label class="custom-control-label" for="protocol"><a href="#" class="text-danger">同意竞拍协议</a> </label>
                     </div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="save-info">
                         <label class="custom-control-label" for="save-info">保存地址下次使用</label>
                     </div>
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" type="submit">确认</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" disabled type="submit">确认</button>
                 </form>
             </div>
             <div class="col-lg-3 w-75">
@@ -117,6 +117,9 @@
         $('#buy_click').click(function () {
             alert('支付成功');
         })
-    })
+    });
+    function protocolClick() {
+        $('#buy_click').disabled = !$(this).checked;
+    }
 </script>
 </html>

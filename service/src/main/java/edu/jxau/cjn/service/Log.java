@@ -22,9 +22,14 @@ public interface Log {
 
     default void error(String text, Throwable throwable, Object... objects) {
         if (getLogger().isErrorEnabled()) {
-            getLogger().error("fatal error: " + text + "error info :[{}]", objects, throwable.getMessage());
+            if (throwable != null){
+                getLogger().error("fatal error: " + text + "error info :[{}]", objects, throwable.getMessage());
+            }
+            getLogger().error("fatal error: " + text, objects);
         }
-        throwable.printStackTrace();
+        if (throwable != null){
+            throwable.printStackTrace();
+        }
     }
 
     default void info(String text, Object... objects) {

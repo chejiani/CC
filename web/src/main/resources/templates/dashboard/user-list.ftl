@@ -25,7 +25,7 @@
             <div class="table-responsive">
                 <table
                         data-toggle="table"
-                        data-url="${ctx}/manager/list/goods/data"
+                        data-url="${ctx}/user/manage/list/user/data"
                         data-pagination="true"
                         data-search="true">
                     <thead>

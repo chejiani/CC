@@ -75,8 +75,8 @@
                         </div>
                         <div class="card-footer">
                             <div class="btn-group justify-content-between align-items-center float-right" role="group">
-                                <button type="button" id="bid_click" goods_no="${goods.goodsId}"
-                                        class="btn btn-lg btn-outline-dark p-1">叫价
+                                <button type="button" goods_no="${goods.goodsId}"
+                                        class="btn btn-lg btn-outline-dark p-1 bid_click">叫价
                                 </button>
                                 <a type="button" href="/order/create/${goods.goodsId}" class="btn btn-lg btn-success p-1">
                                     买入
@@ -102,19 +102,4 @@
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
-<script>
-    $(function () {
-        $('#bid_click').click(function () {
-            var goods = $(this).attr('good_no');
-            $.get('${ctx}', {id: goods}, function (data) {
-                var newPrice = prompt("输入本轮出价:", "");
-                if (newPrice > "") {
-                    $.post('', {id: goods}, function (data) {
-
-                    })
-                }
-            })
-        });
-    })
-</script>
 </html>

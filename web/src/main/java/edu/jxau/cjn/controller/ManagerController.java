@@ -34,7 +34,7 @@ public class ManagerController {
         if (goodsService.save(goods, pics)){
             return "redirect:/manager/list/goods";
         } else {
-            return "503";
+            return "500";
         }
     }
 

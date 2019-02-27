@@ -30,14 +30,14 @@
                 </div>
                 <table  data-toolbar="#toolbar"
                         data-toggle="table"
-                        data-url="${ctx}/manager/list/role"
+                        data-url="${ctx}/user/manager/list/role/data"
                         data-pagination="true"
                         data-search="true">
                     <thead>
                     <tr>
                         <th data-sortable="true" data-field="name">角色名称</th>
                         <th data-field="description">角色描述</th>
-                        <th data-field="isPreset">是否预设</th>
+                        <th data-field="preset">是否预设</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>

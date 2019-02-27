@@ -109,17 +109,43 @@
                 showPanel.hide();
             });
         });
-    }
+    };
+
+    $('.bid_click').click(function () {
+        var goods = $(this).attr('goods_no');
+        var newPrice = prompt("输入本轮出价:", "");
+        $.get('/bid/' + goods + '/' + newPrice, function (response, status, xhr) {
+            if (xhr.status === 200){
+                if (response.code === '200'){
+                    alert('叫价成功');
+                    window.location.reload();
+                } else if (response.code === '500'){
+                    alert('叫价失败');
+                    window.location.reload();
+                }
+            } else if (xhr.status === '302') {
+                window.location.href = '${ctx}/user/login'
+            } else {
+                alert('叫价失败');
+                window.location.reload();
+            }
+        })
+    });
+    $(document).ajaxComplete(function(event, xhr, settings) {
+        if (xhr.getResponseHeader('REQUIRE_AUTH') === 'true') {
+            window.location.href = "/user/login";
+        }
+    });
 })(jQuery);
 
 $('.show').zoomImage();
-$('.show-small-img:first-of-type').css({'border': 'solid 1px #951b25', 'padding': '2px'})
-$('.show-small-img:first-of-type').attr('alt', 'now').siblings().removeAttr('alt')
+$('.show-small-img:first-of-type').css({'border': 'solid 1px #951b25', 'padding': '2px'});
+$('.show-small-img:first-of-type').attr('alt', 'now').siblings().removeAttr('alt');
 $('.show-small-img').click(function () {
-    $('#show-img').attr('src', $(this).attr('src'))
-    $('#big-img').attr('src', $(this).attr('src'))
-    $(this).attr('alt', 'now').siblings().removeAttr('alt')
-    $(this).css({'border': 'solid 1px #951b25', 'padding': '2px'}).siblings().css({'border': 'none', 'padding': '0'})
+    $('#show-img').attr('src', $(this).attr('src'));
+    $('#big-img').attr('src', $(this).attr('src'));
+    $(this).attr('alt', 'now').siblings().removeAttr('alt');
+    $(this).css({'border': 'solid 1px #951b25', 'padding': '2px'}).siblings().css({'border': 'none', 'padding': '0'});
     if ($('#small-img-roll').children().length > 4) {
         if ($(this).index() >= 3 && $(this).index() < $('#small-img-roll').children().length - 1){
             $('#small-img-roll').css('left', -($(this).index() - 2) * 76 + 'px')

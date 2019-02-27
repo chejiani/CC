@@ -59,7 +59,7 @@ public class Goods implements Serializable {
      * 允许竞拍
      */
     @Column(updatable = false)
-    private boolean auction;
+    private boolean auction = true;
 
     /**
      * 允许一口价
@@ -77,13 +77,20 @@ public class Goods implements Serializable {
      * 是否下架
      */
     @Column
-    private boolean obtained;
+    private boolean obtained = true;
 
     /**
      * 库存
      */
     @Column
     private int stock;
+
+    @PrePersist
+    public void prePersist(){
+        if (stock <= 0){
+            stock = 1;
+        }
+    }
 
     public Album getAlbum() {
         return album;

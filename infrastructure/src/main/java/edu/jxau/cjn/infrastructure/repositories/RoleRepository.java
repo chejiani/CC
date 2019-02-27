@@ -7,4 +7,6 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
 
     Role findByPresetIsTrue();
 
+    Role findByName(String name);
+
 }

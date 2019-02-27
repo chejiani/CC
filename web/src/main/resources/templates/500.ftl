@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-    <title>404 - 找不到文件或目录。</title>
+    <title>500 - 内部服务器错误。</title>
     <style type="text/css">
         <!--
         body{margin:0;font-size:.7em;font-family:Verdana, Arial, Helvetica, sans-serif;background:#EEEEEE;}
@@ -21,8 +21,8 @@
 <div id="header"><h1>服务器错误</h1></div>
 <div id="content">
     <div class="content-container"><fieldset>
-            <h2>404 - 找不到文件或目录。</h2>
-            <h3>您要查找的资源可能已被删除，已更改名称或者暂时不可用。</h3>
+            <h2>500 - 内部服务器错误。</h2>
+            <h3>很遗憾，我们遇到点问题，暂时没办法为您效力。</h3>
         </fieldset></div>
 </div>
 </body>

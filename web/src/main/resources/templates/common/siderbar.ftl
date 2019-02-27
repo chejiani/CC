@@ -8,12 +8,6 @@
                 </a>
             </li>
             <li class="nav-item border-bottom nav-hover">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-list fa-lg"></i>
-                    用户
-                </a>
-            </li>
-            <li class="nav-item border-bottom nav-hover">
                 <a class="nav-link" href="${ctx}/manager/list/goods">
                     <i class="fas fa-store fa-lg"></i>
                     商品
