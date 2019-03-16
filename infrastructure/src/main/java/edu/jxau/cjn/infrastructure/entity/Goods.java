@@ -64,6 +64,10 @@ public class Goods implements Serializable {
     @Column(updatable = false)
     private boolean auction = true;
 
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date auctionDeadline;
+
     /**
      * 允许一口价
      */
@@ -197,5 +201,13 @@ public class Goods implements Serializable {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public Date getAuctionDeadline() {
+        return auctionDeadline;
+    }
+
+    public void setAuctionDeadline(Date auctionDeadline) {
+        this.auctionDeadline = auctionDeadline;
     }
 }
