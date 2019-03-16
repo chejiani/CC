@@ -1,5 +1,8 @@
 package edu.jxau.cjn.infrastructure.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -20,6 +23,7 @@ public class Bid implements Serializable {
      */
     @ManyToOne(optional = false)
     @JoinColumn(name = "goodsId", updatable = false, nullable = false)
+    @Fetch(FetchMode.JOIN)
     private Goods goods;
 
     /**

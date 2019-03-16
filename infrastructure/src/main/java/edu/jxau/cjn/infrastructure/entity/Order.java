@@ -32,6 +32,11 @@ public class Order implements Serializable {
     @Fetch(FetchMode.JOIN)
     private Goods goods;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "userId", updatable = false, nullable = false)
+    @Fetch(FetchMode.JOIN)
+    private User user;
+
     /**
      * 数量
      */
@@ -61,7 +66,7 @@ public class Order implements Serializable {
 
     @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    private Date createDate = new Date();
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -157,5 +162,13 @@ public class Order implements Serializable {
 
     public void setPayDeadline(Date payDeadline) {
         PayDeadline = payDeadline;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

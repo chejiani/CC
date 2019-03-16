@@ -84,7 +84,7 @@ public class Goods implements Serializable {
      * 是否下架
      */
     @Column
-    private boolean obtained = true;
+    private boolean obtained = false;
 
     /**
      * 库存
