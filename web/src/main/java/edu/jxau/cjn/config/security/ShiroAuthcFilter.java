@@ -9,6 +9,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 自定义filter，实现Ajax请求可以跳转登陆
+ */
 public class ShiroAuthcFilter extends FormAuthenticationFilter {
 
     public ShiroAuthcFilter() {

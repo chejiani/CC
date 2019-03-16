@@ -1,11 +1,14 @@
 package edu.jxau.cjn.infrastructure.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
-@Table(name = "JAUX_ORDER")
 public class Order implements Serializable {
 
     /**
@@ -26,6 +29,7 @@ public class Order implements Serializable {
      */
     @OneToOne
     @MapsId
+    @Fetch(FetchMode.JOIN)
     private Goods goods;
 
     /**
@@ -54,6 +58,34 @@ public class Order implements Serializable {
 
     @Column(length = 200)
     private String addr;
+
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createDate;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date payDate;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date PayDeadline;
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
+    }
 
     public String getAddr() {
         return addr;
@@ -117,5 +149,13 @@ public class Order implements Serializable {
 
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public Date getPayDeadline() {
+        return PayDeadline;
+    }
+
+    public void setPayDeadline(Date payDeadline) {
+        PayDeadline = payDeadline;
     }
 }

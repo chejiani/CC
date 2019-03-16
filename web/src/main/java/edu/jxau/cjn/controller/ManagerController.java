@@ -5,10 +5,8 @@ import edu.jxau.cjn.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,6 +24,13 @@ public class ManagerController {
 
     @GetMapping(value = "add/goods")
     public String addGoods(){
+        return "dashboard/add-goods";
+    }
+
+    @GetMapping(value = "edit/goods/{id}")
+    public String editGoods(@PathVariable(value = "id") long id, Model model){
+        Goods goods = goodsService.getOne(id);
+        model.addAttribute("goods", goods);
         return "dashboard/add-goods";
     }
 

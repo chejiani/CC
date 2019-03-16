@@ -69,7 +69,11 @@
                 <div class="col-md-3 card-deck">
                     <div class="card mb-4 shadow-sm">
                         <a href="/details/${s.goodsId}">
-                            <img alt="" src="${ctx}/asset/1.svg" width="100%" height="225">
+                            <#if s.album??>
+                                <img alt="" src="${ctx}/${s.album.mainPic!''}" width="100%" height="225">
+                            <#else >
+                                <img alt="" src="#" width="100%" height="225">
+                            </#if>
                         </a>
                         <div class="card-body">
                             <a href="/details/${s.goodsId}">
@@ -106,6 +110,11 @@
         </div>
     </div>
 </main>
+<div id="jsonSource">
+        <pre id="result">
+
+        </pre>
+</div>
 <#include 'common/footer.ftl'>
 </body>
 <script src="${ctx}js/jquery-3.1.1.min.js"></script>

@@ -24,7 +24,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-7 px-lg-5">
-                <form novalidate>
+                <form novalidate method="post" action="${ctx}/order/create">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">姓</label>
@@ -60,7 +60,7 @@
 
                     <hr class="mb-4">
                     <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="protocol">
+                        <input type="checkbox" class="custom-control-input" id="protocol" onclick="protocolClick(this)">
                         <label class="custom-control-label" for="protocol"><a href="#" class="text-danger">同意竞拍协议</a> </label>
                     </div>
                     <div class="custom-control custom-checkbox">
@@ -73,11 +73,15 @@
             </div>
             <div class="col-lg-3 w-75">
                 <div class="card" style="width: 18rem;">
-                    <a href="/details/${goods.goodsId}">
-                        <img alt="" src="${ctx}/asset/1.svg" width="100%" height="225">
+                    <a href="${ctx}/details/${goods.goodsId}">
+                        <#if goods.album??>
+                            <img alt="" src="${ctx}/${goods.album.mainPic!''}" width="100%" height="225">
+                            <#else >
+                                <img alt="" src="#" width="100%" height="225">
+                        </#if>
                     </a>
                     <div class="card-body">
-                        <a href="/details/222" class="text-info text-decoration-none">
+                        <a href="${ctx}/details/${goods.goodsId}" class="text-info text-decoration-none">
                             <h6 class="card-title">${goods.goodsName}</h6>
                         </a>
                         <ul class="list-group">
@@ -113,13 +117,11 @@
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
 <script>
-    $(function () {
-        $('#buy_click').click(function () {
-            alert('支付成功');
-        })
-    });
-    function protocolClick() {
-        $('#buy_click').disabled = !$(this).checked;
+    function protocolClick(obj) {
+        var btn = $('#buy_click')[0];
+        console.log(btn.disabled);
+        console.log(obj.checked);
+        btn.disabled = !obj.checked;
     }
 </script>
 </html>

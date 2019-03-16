@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "JAUX_WATCH")
 public class Watch implements Serializable {
 
     @Id

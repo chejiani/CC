@@ -15,8 +15,11 @@
     </div>
 
     <div class="form-label-group">
-        <input type="text" id="inputNickName" class="form-control" name="nickName" placeholder="" required autofocus>
+        <input type="text" id="inputNickName" class="form-control" name="nickName" onblur="checkUser(this)"
+               placeholder="" required autofocus>
         <label for="inputNickName">用户名</label>
+        <div class="invalid-username" style="color: #ff0000">
+        </div>
     </div>
 
     <div class="form-label-group">
@@ -42,12 +45,25 @@
     <p class="mt-5 mb-3 text-muted text-center">© 2017-2018</p>
 </form>
 </body>
+<script src="${ctx}/js/jquery-3.1.1.min.js"></script>
 <script type="application/javascript">
     function submitClick() {
         document.getElementsByClassName('form-register').submit();
     }
+
     function changeStatus(obj) {
         document.getElementById('submitBtn').disabled = !obj.checked;
+    }
+
+    function checkUser(obj) {
+        $.get("${ctx}/user/available/" + obj.value,
+            function (data) {
+                if (data !== true) {
+                    document.getElementById('submitBtn').disabled = true;
+                    obj.value = '';
+                    $('.invalid-username')[0].innerHTML='用户已经存在';
+                }
+            });
     }
 </script>
 </html>

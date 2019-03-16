@@ -38,10 +38,10 @@
                         <th data-sortable="true" data-field="goodsName">商品名称</th>
                         <th data-field="goodsDesc">商品描述</th>
                         <th data-field="reservePrice">竞拍价</th>
+                        <th data-field="stock">库存</th>
                         <th data-field="fixedPrice">一口价</th>
                         <th data-field="fixed">允许一口价</th>
                         <th data-field="auction">允许竞拍</th>
-                        <th data-field="obtained">是否下架</th>
                         <th data-field="obtained">是否下架</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
@@ -61,7 +61,7 @@
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
         var html = "<a href='${ctx}/details/"+row.goodsId+"' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>"
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>";
+        html += "<a href='${ctx}/manager/edit/goods/"+row.goodsId+"' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>";
         html += "<a href='#' class='btn btn-default'><i class='fas fa-times'></i> 删除</a>";
         return html;
     }

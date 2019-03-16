@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "JAUX_USER")
 public class User implements Serializable {
 
     @Id

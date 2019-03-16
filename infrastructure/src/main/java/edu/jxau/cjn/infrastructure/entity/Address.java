@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "JAUX_ADDRESS")
 public class Address implements Serializable {
 
     @Id

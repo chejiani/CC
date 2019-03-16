@@ -32,9 +32,13 @@ public class UserService implements Log {
         String salt = EncryptUtil.generateSalt(16);
         user.setSalt(Hex.encodeHexString(salt.getBytes()));
         user.setPassword(Hex.encodeHexString(EncryptUtil.Sha1(salt.getBytes(), user.getPassword().getBytes(), 0)));
-        Role role = roleRepository.findByPresetIsTrue();
+        Role role = getPresetRole();
         user.setRole(role);
         return null != userRepository.save(user);
+    }
+
+    public Role getPresetRole(){
+        return roleRepository.findByPresetIsTrue();
     }
 
     public boolean addRole(Role role){

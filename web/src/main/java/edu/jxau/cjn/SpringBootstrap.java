@@ -9,7 +9,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class SpringBootstrap {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootstrap.class);
+        SpringApplication app = new SpringApplication(SpringBootstrap.class);
+        app.run(args);
     }
 
 

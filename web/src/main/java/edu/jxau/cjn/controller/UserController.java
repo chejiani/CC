@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
 import java.util.List;
 
 @Controller
@@ -26,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "login")
-    public String login(HttpServletRequest request, HttpServletResponse response){
+    public String login(HttpServletRequest request, HttpServletResponse response) {
         if (isAjax(request)) {
             HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
             httpServletResponse.addHeader("REQUIRE_AUTH", "true");
@@ -42,14 +41,22 @@ public class UserController {
         return "user/login";
     }
 
+
+    @GetMapping(value = "available/{username}")
+    @ResponseBody
+    public boolean available(@PathVariable(value = "username") String username) {
+        User user = userService.getUserByUserName(username);
+        return user == null;
+    }
+
     @GetMapping(value = "register")
-    public String register(){
+    public String register() {
         return "user/register";
     }
 
     @PostMapping(value = "register")
-    public String register(User user, boolean agree){
-        if (agree && userService.register(user)){
+    public String register(User user, boolean agree) {
+        if (agree && userService.register(user)) {
             return "redirect:/user/login";
         } else {
             throw new RuntimeException("用户注册失败");
@@ -57,47 +64,47 @@ public class UserController {
     }
 
     @GetMapping(value = "forget")
-    public String forget(){
+    public String forget() {
         return "forget";
     }
 
     @GetMapping(value = "manage/list/user")
-    public String userList(){
+    public String userList() {
         return "dashboard/user-list";
     }
 
     @GetMapping(value = "manage/list/user/data")
     @ResponseBody
-    public List<User> getUserList(){
+    public List<User> getUserList() {
         return userService.getUserWithPagination(PageRequest.of(0, 10)).getContent();
     }
 
     @GetMapping(value = "manager/list/role")
-    public String roleList(){
+    public String roleList() {
         return "dashboard/role-list";
     }
 
     @GetMapping(value = "manager/list/role/data")
     @ResponseBody
-    public List<Role> getRoleList(){
+    public List<Role> getRoleList() {
         return userService.getRoleWithPagination(PageRequest.of(0, 10)).getContent();
     }
 
     @PostMapping(value = "manager/add/role")
-    public String addRole(Role role){
+    public String addRole(Role role) {
         try {
-            if (userService.addRole(role)){
+            if (userService.addRole(role)) {
                 return "redirect:/user/manager/list/role";
             } else {
                 return "redirect:/500";
             }
-        } catch (DataDuplicateException e){
+        } catch (DataDuplicateException e) {
             return "redirect:/user/manager/list/role";
         }
     }
 
     @GetMapping(value = "manager/add/role")
-    public String addRole(){
+    public String addRole() {
         return "dashboard/add-role";
     }
 

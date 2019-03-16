@@ -10,7 +10,7 @@ spring:
     hibernate:
       ddl-auto: update
       naming:
-        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        physical-strategy: edu.jxau.cjn.infrastructure.DefaultPhysicalNamingStrategy
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
@@ -37,4 +37,4 @@ logging:
     org.apache: info
     org.springframework: debug
 server:
-  port: 8888
+  port: 7777

@@ -36,6 +36,7 @@ public class GoodsService {
             if (pic != null){
                 Album album = new Album();
                 album.setPicAddr(objectMapper.writeValueAsString(pic));
+                album.setMainPic(pic.get(0));
                 albumRepository.save(album);
                 goods.setAlbum(album);
             }

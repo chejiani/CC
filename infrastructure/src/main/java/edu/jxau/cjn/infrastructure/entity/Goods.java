@@ -1,5 +1,8 @@
 package edu.jxau.cjn.infrastructure.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +11,6 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "JAUX_GOODS")
 public class Goods implements Serializable {
 
     /**
@@ -25,6 +27,7 @@ public class Goods implements Serializable {
     private String goodsName;
 
     @OneToOne
+    @Fetch(value = FetchMode.JOIN)
     private Album album;
 
     /**

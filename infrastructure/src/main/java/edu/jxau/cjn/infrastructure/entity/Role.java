@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "JAUX_ROLE")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 0L;

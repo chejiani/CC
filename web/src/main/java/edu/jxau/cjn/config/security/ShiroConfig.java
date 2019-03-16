@@ -40,8 +40,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/user/login", "authc");
         filterChainDefinitionMap.put("/favicon.ico", "anon");
-        //filterChainDefinitionMap.put("/manager/**", "admin");
-        //filterChainDefinitionMap.put("*/manager/**", "admin");
+        filterChainDefinitionMap.put("/manager/**", "roles[admin]");
+        filterChainDefinitionMap.put("*/manager/**", "roles[admin]");
         filterChainDefinitionMap.put("/bid/**", "user");
         filterChainDefinitionMap.put("/order/**", "user");
         return filterChainDefinitionMap;

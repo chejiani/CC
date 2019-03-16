@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "JAUX_ALBUM")
 public class Album implements Serializable {
 
     /**
@@ -13,6 +12,9 @@ public class Album implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column
+    private String mainPic;
 
     @Column(columnDefinition = "longtext null")
     private String picAddr;
@@ -32,5 +34,13 @@ public class Album implements Serializable {
 
     public void setPicAddr(String picAddr) {
         this.picAddr = picAddr;
+    }
+
+    public String getMainPic() {
+        return mainPic;
+    }
+
+    public void setMainPic(String mainPic) {
+        this.mainPic = mainPic;
     }
 }

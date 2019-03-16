@@ -2,30 +2,23 @@ spring:
   application:
     name: cjn-schedule-application
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&verifyServerCertificate=false&useSSL=false&requireSSL=false
-    driver-class-name: com.mysql.jdbc.Driver
-    username: test
-    password: test
-    tomcat:
-      max-wait: 10000
-      min-idle: 0
-      initial-size: 25
-      validation-query: SELECT 1
-      test-on-borrow: false
-      test-while-idle: true
-      time-between-eviction-runs-millis: 18800
-      remove-abandoned: true
-      remove-abandoned-timeout: 180
+    url: jdbc:mysql://localhost:3306/cjn
+    username: root
+    password: spnor87858389
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: edu.jxau.cjn.infrastructure.DefaultPhysicalNamingStrategy
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
 regCenter:
-  serverList: localhost:6181
+  serverList: localhost:2181
   namespace: elastic-job-lite-springboot
 
 simpleJob:
-  cron: 0/5 * * * * ?
-  shardingTotalCount: 3
-  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
-
-dataflowJob:
-  cron: 0/5 * * * * ?
-  shardingTotalCount: 3
-  shardingItemParameters: 0=Beijing,1=Shanghai,2=Guangzhou
+  cron: 0 0/5 * * * ?
+  shardingTotalCount: 1
+  shardingItemParameters: 0=Shanghai

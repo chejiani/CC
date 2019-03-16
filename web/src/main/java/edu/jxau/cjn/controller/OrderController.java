@@ -1,12 +1,14 @@
 package edu.jxau.cjn.controller;
 
 import edu.jxau.cjn.infrastructure.entity.Goods;
+import edu.jxau.cjn.infrastructure.entity.Order;
 import edu.jxau.cjn.service.goods.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -30,6 +32,11 @@ public class OrderController {
             model.addAttribute("goods", goodsService.getOne(Long.valueOf(goodsId)));
             return "order/create";
         }
+    }
+
+    @PostMapping(value = "create")
+    public String createOrder(Order order){
+        return "order/pay";
     }
 
 }

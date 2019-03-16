@@ -20,7 +20,7 @@
             <#-- 图片展示区 -->
             <div class="col-4 justify-content-center shadow-lg">
                 <div class="p-5 bg-transparent">
-                    <div class="show" href="${ctx}/asset/1.svg">
+                    <div class="show" id="big-img" href="${ctx}/${albums[0]}">
                         <#if albums??>
                             <img src="${ctx}/${albums[0]}" id="show-img" alt="${albums[0]}">
                         </#if>
