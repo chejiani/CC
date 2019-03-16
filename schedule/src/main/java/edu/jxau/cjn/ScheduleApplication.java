@@ -1,13 +1,21 @@
-package edu.jxau.cjn.schedule;
+package edu.jxau.cjn;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class ScheduleApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ScheduleApplication.class, args);
+    }
+
+    @Bean
+    public ObjectMapper objectMapper(){
+        return new ObjectMapper();
     }
 
 }

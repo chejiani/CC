@@ -74,7 +74,7 @@ public class Order implements Serializable {
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date PayDeadline;
+    private Date payDeadline;
 
     public Date getCreateDate() {
         return createDate;
@@ -157,11 +157,11 @@ public class Order implements Serializable {
     }
 
     public Date getPayDeadline() {
-        return PayDeadline;
+        return payDeadline;
     }
 
     public void setPayDeadline(Date payDeadline) {
-        PayDeadline = payDeadline;
+        this.payDeadline = payDeadline;
     }
 
     public User getUser() {

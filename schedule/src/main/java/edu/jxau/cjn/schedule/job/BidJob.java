@@ -2,7 +2,6 @@ package edu.jxau.cjn.schedule.job;
 
 import com.dangdang.ddframe.job.api.ShardingContext;
 import com.dangdang.ddframe.job.api.simple.SimpleJob;
-import edu.jxau.cjn.service.goods.GoodsService;
 import edu.jxau.cjn.service.order.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
 

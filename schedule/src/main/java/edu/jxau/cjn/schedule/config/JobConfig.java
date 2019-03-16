@@ -9,7 +9,10 @@ import com.dangdang.ddframe.job.lite.config.LiteJobConfiguration;
 import com.dangdang.ddframe.job.lite.spring.api.SpringJobScheduler;
 import com.dangdang.ddframe.job.reg.zookeeper.ZookeeperRegistryCenter;
 import edu.jxau.cjn.schedule.job.BidJob;
+import edu.jxau.cjn.schedule.job.OrderCancelJob;
+import edu.jxau.cjn.service.order.BidService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,16 +29,29 @@ public class JobConfig {
     @Autowired
     private JobEventConfiguration jobEventConfiguration;
 
-    @Bean
-    public SimpleJob simpleJob() {
+    @Bean(value = "bidJob")
+    public SimpleJob bidJob() {
         return new BidJob();
     }
 
+    @Bean(value = "orderCancelJob")
+    public SimpleJob orderCancelJob(){
+        return new OrderCancelJob();
+    }
+
     @Bean(initMethod = "init")
-    public JobScheduler simpleJobScheduler(final SimpleJob simpleJob, @Value("${simpleJob.cron}") final String cron,
-                                           @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
-                                           @Value("${simpleJob.shardingItemParameters}") final String shardingItemParameters) {
-        return new SpringJobScheduler(simpleJob, regCenter, getLiteJobConfiguration(simpleJob.getClass(),
+    public JobScheduler bidJobScheduler(@Autowired @Qualifier(value = "bidJob") final SimpleJob bidJob, @Value("${simpleJob.cron}") final String cron,
+                                        @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
+                                        @Value("${simpleJob.shardingItemParameters}") final String shardingItemParameters) {
+        return new SpringJobScheduler(bidJob, regCenter, getLiteJobConfiguration(bidJob.getClass(),
+                cron, shardingTotalCount, shardingItemParameters), jobEventConfiguration);
+    }
+
+    @Bean(initMethod = "init")
+    public JobScheduler orderCancelJobScheduler(@Autowired @Qualifier(value = "orderCancelJob")  final SimpleJob orderCancelJob, @Value("${simpleJob.cron}") final String cron,
+                                        @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
+                                        @Value("${simpleJob.shardingItemParameters}") final String shardingItemParameters) {
+        return new SpringJobScheduler(orderCancelJob, regCenter, getLiteJobConfiguration(orderCancelJob.getClass(),
                 cron, shardingTotalCount, shardingItemParameters), jobEventConfiguration);
     }
 

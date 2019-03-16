@@ -26,7 +26,7 @@ public class OrderService implements Log {
     public void cancelOrder() {
         List<Order> orders = orderRepository.findByOrderStatusEqualsAndPayDeadlineIsBefore(OrderStatus.WAIT_PAY.getCode(), new Date());
         if (orders != null && orders.size() > 0){
-            orders.stream().forEach(item -> {
+            orders.forEach(item -> {
                 item.setOrderStatus(OrderStatus.CLOSE.getCode());
                 orderRepository.save(item);
             });
