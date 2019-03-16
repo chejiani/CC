@@ -12,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,13 +35,14 @@ public class GoodsService {
                     .filter(StringUtils::isNoneBlank)
                     .map(item -> item.substring(item.lastIndexOf("\\") + 1))
                     .collect(Collectors.toList());
-            if (pic != null){
-                Album album = new Album();
-                album.setPicAddr(objectMapper.writeValueAsString(pic));
-                album.setMainPic(pic.get(0));
-                albumRepository.save(album);
-                goods.setAlbum(album);
-            }
+            Album album = new Album();
+            album.setPicAddr(objectMapper.writeValueAsString(pic));
+            album.setMainPic(pic.get(0));
+            albumRepository.save(album);
+            goods.setAlbum(album);
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 1);
+            goods.setAuctionDeadline(calendar.getTime());
             goods = goodsRepository.save(goods);
             return goods != null;
         } catch (Exception e){
