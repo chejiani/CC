@@ -84,23 +84,15 @@ public class UserController {
         return "dashboard/role-list";
     }
 
-    @GetMapping(value = "manager/list/role/data")
-    @ResponseBody
-    public List<Role> getRoleList() {
-        return userService.getRoleWithPagination(PageRequest.of(0, 10)).getContent();
+    @GetMapping(value = "manager/update/{id}")
+    public boolean update(@PathVariable(value = "id") long id){
+        return userService.update(id);
     }
 
-    @PostMapping(value = "manager/add/role")
-    public String addRole(Role role) {
-        try {
-            if (userService.addRole(role)) {
-                return "redirect:/user/manager/list/role";
-            } else {
-                return "redirect:/500";
-            }
-        } catch (DataDuplicateException e) {
-            return "redirect:/user/manager/list/role";
-        }
+    @PostMapping(value = "manager/del/user/{id}")
+    @ResponseBody
+    public boolean del(@PathVariable(value = "id") long id){
+        return userService.delete(id);
     }
 
     @GetMapping(value = "manager/add/role")

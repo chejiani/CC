@@ -40,9 +40,9 @@
                         <th data-field="reservePrice">竞拍价</th>
                         <th data-field="stock">库存</th>
                         <th data-field="fixedPrice">一口价</th>
-                        <th data-field="fixed">允许一口价</th>
-                        <th data-field="auction">允许竞拍</th>
-                        <th data-field="obtained">是否下架</th>
+                        <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
+                        <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
+                        <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>
@@ -62,8 +62,17 @@
     function operateFormatter(value, row, index) {
         var html = "<a href='${ctx}/details/"+row.goodsId+"' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>"
         html += "<a href='${ctx}/manager/edit/goods/"+row.goodsId+"' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>";
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-times'></i> 删除</a>";
+        if (!row.obtained){
+            html += "<a href='#' class='btn btn-default' onclick='delGoods("+row.goodsId+")'><i class='fas fa-times'></i> 下架</a>";
+        }
         return html;
+    }
+    
+    function delGoods(id) {
+        $.post("${ctx}/manager/del/goods/" + id, function () {
+            alert('操作成功');
+            window.location.reload();
+        })        
     }
 </script>
 </html>

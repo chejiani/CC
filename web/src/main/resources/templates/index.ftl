@@ -110,11 +110,6 @@
         </div>
     </div>
 </main>
-<div id="jsonSource">
-        <pre id="result">
-
-        </pre>
-</div>
 <#include 'common/footer.ftl'>
 </body>
 <script src="${ctx}js/jquery-3.1.1.min.js"></script>

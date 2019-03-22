@@ -8,6 +8,8 @@ import edu.jxau.cjn.infrastructure.repositories.OrderRepository;
 import edu.jxau.cjn.service.Log;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,6 +33,15 @@ public class OrderService implements Log {
                 orderRepository.save(item);
             });
         }
+    }
+
+    public Page<Order> getGoodsWithPagination(Pageable pageable){
+        return orderRepository.findAll(pageable);
+    }
+
+    public boolean update(Order order){
+        order = orderRepository.save(order);
+        return order != null;
     }
 
     public void createOrder(Order order, long goodsId, long userId){

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserService implements Log {
 
@@ -24,11 +26,11 @@ public class UserService implements Log {
     @Autowired
     private RoleRepository roleRepository;
 
-    public User getUserByUserName(String user){
+    public User getUserByUserName(String user) {
         return userRepository.findUserByNickName(user);
     }
 
-    public boolean register(User user){
+    public boolean register(User user) {
         String salt = EncryptUtil.generateSalt(16);
         user.setSalt(Hex.encodeHexString(salt.getBytes()));
         user.setPassword(Hex.encodeHexString(EncryptUtil.Sha1(salt.getBytes(), user.getPassword().getBytes(), 0)));
@@ -37,16 +39,16 @@ public class UserService implements Log {
         return null != userRepository.save(user);
     }
 
-    public Role getPresetRole(){
+    public Role getPresetRole() {
         return roleRepository.findByPresetIsTrue();
     }
 
-    public boolean addRole(Role role){
-        if (null == roleRepository.findByName(role.getName())){
-            if (null == roleRepository.findByPresetIsTrue()){
+    public boolean addRole(Role role) {
+        if (null == roleRepository.findByName(role.getName())) {
+            if (null == roleRepository.findByPresetIsTrue()) {
                 role.setPreset(true);
             }
-            if (null != roleRepository.save(role)){
+            if (null != roleRepository.save(role)) {
                 return true;
             } else {
                 error("数据保存失败", null);
@@ -58,12 +60,40 @@ public class UserService implements Log {
         }
     }
 
-    public Page<User> getUserWithPagination(Pageable pageable){
+    public Page<User> getUserWithPagination(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
 
-    public Page<Role> getRoleWithPagination(Pageable pageable){
+    public Page<Role> getRoleWithPagination(Pageable pageable) {
         return roleRepository.findAll(pageable);
+    }
+
+    public boolean delete(long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            userRepository.delete(user);
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 只修改权限
+     *
+     * @param id
+     * @return
+     */
+    public boolean update(long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            user.setRole(roleRepository.findByName("admin"));
+            userRepository.save(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

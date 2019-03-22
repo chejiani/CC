@@ -29,10 +29,14 @@
                     <div class="col-lg-11">
                         <form id="goods-form" class="needs-validation" method="post" action="${ctx}/manager/add/goods"
                               novalidate="">
+                            <#if goods.goodsId??>
+                                <input type="hidden" name="goodsId" value="${goods.goodsId}"/>
+                                <#else>
+                            </#if>
                             <div class="mb-3">
                                 <label for="username">商品标题</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="goodsName" id="username">
+                                    <input type="text" class="form-control" value="${goods.goodsName!''}" name="goodsName" id="username">
                                     <div class="invalid-feedback" style="width: 100%;">
                                         Your username is required.
                                     </div>
@@ -42,8 +46,7 @@
                             <div class="mb-3">
                                 <label for="username">商品描述</label>
                                 <div class="input-group">
-                                    <textarea class="form-control" name="goodsDesc"
-                                              aria-label="With textarea"></textarea>
+                                    <textarea class="form-control" name="goodsDesc" aria-label="With textarea">${goods.goodsDesc!''}</textarea>
                                 </div>
                             </div>
                             <hr class="mb-3"/>
@@ -57,9 +60,9 @@
                             <hr class="mb-3"/>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="firstName">一口价</label>
+                                    <label for="firstName">一口价(<B style="color: #ff0000">留空则不允许一口价成交</B>)</label>
                                     <input type="number" class="form-control" name="fixedPrice" id="firstName"
-                                           placeholder="" value=""
+                                           placeholder="" value="${goods.fixedPrice!''}"
                                            required="">
                                     <div class="invalid-feedback">
                                         Valid first name is required.
@@ -68,7 +71,7 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">竞拍底价</label>
                                     <input type="number" class="form-control" name="reservePrice" id="lastName"
-                                           placeholder="" value=""
+                                           placeholder="" value="${goods.reservePrice!''}"
                                            required="">
                                     <div class="invalid-feedback">
                                         Valid last name is required.
@@ -76,15 +79,29 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">库存</label>
+                                    <input type="number" class="form-control" name="stock" id="stock"
+                                           placeholder="" value="${goods.stock!'1'}"
+                                           required="">
+                                </div>
+                            </div>
+
                             <hr class="mb-4"/>
                             <div class="mb-3">
                                 <label for="editor" class="font-weight-bold">商品简介文档</label>
                                 <div id="editor">
-
+                                    ${goods.article}
                                 </div>
                                 <input type="hidden" name="article" id="editor-input">
                             </div>
                             <hr class="mb-4">
+                            <#if albums??>
+                                <#list albums as album>
+                                    <input type="hidden" value="${album}" name="pics" />
+                                </#list>
+                            </#if>
                         </form>
                         <button class="btn btn-primary btn-lg btn-block" onclick="submit_click()">提交</button>
                     </div>
@@ -119,10 +136,31 @@
         allowedFileTypes: ['image'],
         theme: "fa",
         allowedFileExtensions: ["jpg", "jpeg", "png", "gif"],
-        uploadUrl: '${ctx}/upload/image'
+        uploadUrl: '${ctx}/upload/image',
+        overwriteInitial: false,
+        initialPreview: [
+            <#if albums??>
+                <#list albums as album>
+                    "<img src='${ctx}/${album}' class='file-preview-image' style='height:160px; width:213px'>",
+                </#list>
+            </#if>
+        ],
+        initialPreviewConfig: [
+            <#if albums??>
+                <#list albums as album>
+                    { type: 'image', width: "120px", key: ${album_index} },
+                </#list>
+            </#if>
+        ],
+        initialPreviewShowDelete: true
     }).on('fileuploaded', function (event, data, previewId, index) {
         var response = data.response;
         var input = $('<input type="hidden" name="pics" />');
+        input.attr('value', response.src);
+        $('form').append(input);
+    }).on('fileremoved', function (event, data, previewId, index) {
+        var response = data.response;
+        var input = $('<input type="hidden" id="'+previewId+'" name="pics" />');
         input.attr('value', response.src);
         $('form').append(input);
     })

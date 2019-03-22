@@ -26,7 +26,7 @@
 
                 <table
                         data-toggle="table"
-                        data-url="${ctx}/manager/list/goods/data"
+                        data-url="${ctx}/order/manager/list/order/data"
                         data-pagination="true"
                         data-search="true">
                     <thead>
@@ -35,10 +35,10 @@
                         <th data-field="goodsDesc">商品描述</th>
                         <th data-field="reservePrice">竞拍价</th>
                         <th data-field="fixedPrice">一口价</th>
-                        <th data-field="fixed">允许一口价</th>
-                        <th data-field="auction">允许竞拍</th>
-                        <th data-field="obtained">是否下架</th>
-                        <th data-field="obtained">是否下架</th>
+                        <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
+                        <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
+                        <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
+                        <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>

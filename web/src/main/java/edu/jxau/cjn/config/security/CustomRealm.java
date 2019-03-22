@@ -54,7 +54,7 @@ public class CustomRealm extends AuthorizingRealm implements Log {
         ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
         User user = userService.getUserByUserName(shiroUser.loginName);
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.addRoles((Collection<String>) user.getRole());
+        info.addRoles(Arrays.asList(user.getRole().getName()));
         return info;
     }
 

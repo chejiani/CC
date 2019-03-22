@@ -11,10 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,16 +33,48 @@ public class GoodsService {
                     .filter(StringUtils::isNoneBlank)
                     .map(item -> item.substring(item.lastIndexOf("\\") + 1))
                     .collect(Collectors.toList());
-            Album album = new Album();
-            album.setPicAddr(objectMapper.writeValueAsString(pic));
-            album.setMainPic(pic.get(0));
-            albumRepository.save(album);
-            goods.setAlbum(album);
+            if (goods.getGoodsId() != 0){
+                Album album = albumRepository.getOne(goods.getGoodsId());
+                if (album != null){
+                    album.setPicAddr(objectMapper.writeValueAsString(pic));
+                    album.setMainPic(pic.get(0));
+                    albumRepository.save(album);
+                } else {
+                    album = new Album();
+                    album.setPicAddr(objectMapper.writeValueAsString(pic));
+                    album.setMainPic(pic.get(0));
+                    albumRepository.save(album);
+                }
+                albumRepository.save(album);
+                goods.setAlbum(album);
+            }
+
+            if (goods.getFixedPrice() == null || goods.getFixedPrice().compareTo(BigDecimal.ZERO) == 0){
+                goods.setFixed(false);
+            } else {
+                goods.setFixed(true);
+            }
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 1);
             goods.setAuctionDeadline(calendar.getTime());
             goods = goodsRepository.save(goods);
             return goods != null;
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean obtained(long id){
+        try {
+            Optional<Goods> optionalGoods = goodsRepository.findById(id);
+            if (optionalGoods.isPresent()){
+                Goods goods = optionalGoods.get();
+                goods.setObtained(true);
+                goodsRepository.save(goods);
+            } else {
+                return false;
+            }
+            return true;
         } catch (Exception e){
             return false;
         }
