@@ -10,9 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController implements Log {
@@ -24,24 +26,35 @@ public class HomeController implements Log {
     private ObjectMapper objectMapper;
 
     @GetMapping(value = {"index", ""})
-    public String index(Model model){
-        model.addAttribute("goodsList", goodsService.getAlL());
+    public String index(Model model) {
+        List<Goods> goodsList = goodsService
+                .getAlL()
+                .parallelStream()
+                .filter(item -> !item.isObtained() && item.getStock() > 0)
+                .collect(Collectors.toList());
+        model.addAttribute("goodsList", goodsList);
         return "index";
     }
 
     @GetMapping(value = "search/{keyWords}")
-    public String search(@PathVariable(name = "keyWords") String keyWords){
+    public String search(@PathVariable(name = "keyWords") String keyWords, Model model) {
+        List<Goods> goodsList = goodsService
+                .getAlL()
+                .parallelStream()
+                .filter(item -> !item.isObtained() && item.getStock() > 0)
+                .collect(Collectors.toList());
+        model.addAttribute("goodsList", goodsList);
         return "goods/search";
     }
 
     @GetMapping(value = "details/{id}")
     public String detail(@PathVariable(value = "id") String id, Model model) throws JsonProcessingException {
         Goods goods = goodsService.getOne(Long.valueOf(id));
-        if (goods == null){
-             return "redirect:404";
+        if (goods == null) {
+            return "redirect:404";
         } else {
             model.addAttribute("goods", goods);
-            if (goods.getAlbum() != null){
+            if (goods.getAlbum() != null) {
                 try {
                     model.addAttribute("albums", objectMapper.readValue(goods.getAlbum().getPicAddr(), List.class));
                 } catch (IOException e) {

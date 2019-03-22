@@ -6,6 +6,9 @@ import edu.jxau.cjn.infrastructure.entity.Goods;
 import edu.jxau.cjn.infrastructure.repositories.AlbumRepository;
 import edu.jxau.cjn.infrastructure.repositories.GoodsRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -99,5 +102,9 @@ public class GoodsService {
 
     public List<Goods> getAlL(){
         return goodsRepository.findAll();
+    }
+
+    public List<Goods> getAlL(String keywords){
+        return goodsRepository.findByGoodsNameLike(keywords);
     }
 }
