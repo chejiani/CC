@@ -1,6 +1,7 @@
 package edu.jxau.cjn.infrastructure.repositories;
 
 import edu.jxau.cjn.infrastructure.entity.Order;
+import edu.jxau.cjn.infrastructure.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.QueryByExampleExecutor;
 
@@ -16,5 +17,12 @@ public interface OrderRepository extends JpaRepository<Order, Long>, QueryByExam
      * @return 满足条件的所有订单
      */
     List<Order> findByOrderStatusEqualsAndPayDeadlineIsBefore(int status, Date date);
+
+    /**
+     * 查询用户的订单
+     * @param user 用户id
+     * @return 用户的订单
+     */
+    List<Order> findByUserIs(User user);
 
 }

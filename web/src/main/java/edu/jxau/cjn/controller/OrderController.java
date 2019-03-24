@@ -1,9 +1,12 @@
 package edu.jxau.cjn.controller;
 
+import edu.jxau.cjn.config.security.ShiroUser;
+import edu.jxau.cjn.infrastructure.entity.Address;
 import edu.jxau.cjn.infrastructure.entity.Goods;
 import edu.jxau.cjn.infrastructure.entity.Order;
 import edu.jxau.cjn.service.goods.GoodsService;
 import edu.jxau.cjn.service.order.OrderService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -22,8 +25,8 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping(value = "list/{user}")
-    public String list(@PathVariable(value = "user") String user) {
+    @GetMapping(value = "list")
+    public String list() {
         return "order/list";
     }
 
@@ -39,10 +42,29 @@ public class OrderController {
     }
 
     @PostMapping(value = "create")
-    public String createOrder(Order order){
+    public String createOrder(Order order, Address address, long goodsId){
+        ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        orderService.createOrder(order, address, goodsId, Long.parseLong(shiroUser.id));
         return "order/pay";
     }
 
+    @GetMapping(value = "oper/{id}/{code}")
+    public boolean oper(@PathVariable(value = "code") int code,
+                        @PathVariable(value = "id") long id){
+        if (1 == code){
+            return true;
+        }
+        if (2 == code){
+            try {
+                orderService.cancelOrder(id);
+                return true;
+            } catch (Exception e){
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
 
     @GetMapping(value = "/manager/list/order")
     public String orderList(){
@@ -53,6 +75,13 @@ public class OrderController {
     @ResponseBody
     public List<Order> getOrderList(){
         return orderService.getGoodsWithPagination(PageRequest.of(0, 10)).getContent();
+    }
+
+    @GetMapping(value = "list/data")
+    @ResponseBody
+    public List<Order> getOrderListForUser(){
+        ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        return orderService.findUsersOrder(Long.parseLong(shiroUser.id));
     }
 
     @PostMapping(value = "manager/update/order")

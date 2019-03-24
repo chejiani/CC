@@ -20,19 +20,16 @@
             <div class="col-10">
                 <table
                         data-toggle="table"
-                        data-url="${ctx}/manager/list/goods/data"
+                        data-url="${ctx}/order/list/data"
                         data-pagination="true"
                         data-search="true">
                     <thead>
                     <tr>
-                        <th data-sortable="true" data-field="goodsName">商品名称</th>
-                        <th data-field="goodsDesc">商品描述</th>
-                        <th data-field="reservePrice">竞拍价</th>
-                        <th data-field="fixedPrice">一口价</th>
-                        <th data-field="fixed">允许一口价</th>
-                        <th data-field="auction">允许竞拍</th>
-                        <th data-field="obtained">是否下架</th>
-                        <th data-field="obtained">是否下架</th>
+                        <th data-sortable="true" data-field="goods.goodsName">商品名称</th>
+                        <th data-field="goods.goodsDesc">商品描述</th>
+                        <th data-field="goods.reservePrice">竞拍底价</th>
+                        <th data-field="totalPrice">买入价</th>
+                        <th data-field="orderStatus">交易状态</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>
@@ -51,10 +48,25 @@
 <script src="${ctx}/js/cjn.js"></script>
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
-        var html = "<a href='#' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>"
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>"
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-times'></i> 删除</a>"
-        return html;
+        if (row.orderStatus === 1){
+            var html = "<a href='#' class='btn btn-default' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
+            return html + "<a href='#' class='btn btn-default' onclick='doPay("+row.id+")'><i class='fas fa-eye'></i> 付款</a>";
+        } else if (row.orderStatus === 2) {
+            return html + "<a href='#' class='btn btn-default' onclick='doCancel(\"+row.id+\")'><i class='fas fa-eye'></i> 取消</a>";
+        }
+    }
+
+    function doCancel(obj) {
+        $.get("${ctx}/order/oper/" + obj + "/2", function () {
+            alert('订单已经取消');
+            window.location.reload();
+        })
+    }
+    function doPay(obj) {
+        $.get("${ctx}/order/oper/" + obj + "/1", function () {
+            alert('付款成功');
+            window.location.reload();
+        })
     }
 </script>
 </html>

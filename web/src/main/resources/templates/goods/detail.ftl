@@ -20,7 +20,7 @@
             <#-- 图片展示区 -->
             <div class="col-4 justify-content-center shadow-lg">
                 <div class="p-5 bg-transparent">
-                    <div class="show" id="big-img" href="${ctx}/${albums[0]}">
+                    <div class="show-img" id="big-img" href="${ctx}/${albums[0]}">
                         <#if albums??>
                             <img src="${ctx}/${albums[0]}" id="show-img" alt="${albums[0]}">
                         </#if>
@@ -99,6 +99,7 @@
 <#include '../common/footer.ftl'>
 </body>
 <script src="${ctx}/js/jquery-3.1.1.min.js"></script>
+<script src="${ctx}js/popper.min.js"></script>
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>

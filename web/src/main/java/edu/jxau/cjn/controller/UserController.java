@@ -4,6 +4,8 @@ import edu.jxau.cjn.infrastructure.entity.Role;
 import edu.jxau.cjn.infrastructure.entity.User;
 import edu.jxau.cjn.service.DataDuplicateException;
 import edu.jxau.cjn.service.user.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,15 @@ public class UserController {
             HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
             httpServletResponse.addHeader("REQUIRE_AUTH", "true");
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return "user/login";
+    }
+
+    @GetMapping(value = "logout")
+    public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
         }
         return "user/login";
     }

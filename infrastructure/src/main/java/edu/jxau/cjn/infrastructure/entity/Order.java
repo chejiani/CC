@@ -24,6 +24,10 @@ public class Order implements Serializable {
     @Column(length = 20, updatable = false)
     private String orderNo;
 
+    @OneToOne
+    @Fetch(FetchMode.JOIN)
+    private Address address;
+
     /**
      * 订单商品
      */
@@ -75,6 +79,14 @@ public class Order implements Serializable {
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDeadline;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public Date getCreateDate() {
         return createDate;

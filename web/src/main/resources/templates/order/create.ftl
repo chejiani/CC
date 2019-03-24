@@ -25,34 +25,27 @@
         <div class="row justify-content-center">
             <div class="col-lg-7 px-lg-5">
                 <form novalidate method="post" action="${ctx}/order/create">
+                    <input type="hidden" value="${goods.goodsId}" name="goodsId"/>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="firstName">姓</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+                            <label for="firstName">联系人：</label>
+                            <input type="text" class="form-control" id="firstName" name="contact" placeholder="" value="" required="">
                             <div class="invalid-feedback">
 
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="lastName">名</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
+                            <label for="lastName">联系电话:</label>
+                            <input type="text" class="form-control" id="lastName" name="contactPhone" placeholder="" value="" required="">
                             <div class="invalid-feedback">
 
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="email">账号 <span class="text-muted">(Optional)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
-                        <div class="invalid-feedback">
-
                         </div>
                     </div>
 
                     <div class="mb-3">
                         <label for="address">收货地址</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required="">
+                        <input type="text" class="form-control" name="addr" id="address" placeholder="1234 Main St" required="">
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
@@ -62,10 +55,6 @@
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="protocol" onclick="protocolClick(this)">
                         <label class="custom-control-label" for="protocol"><a href="#" class="text-danger">同意竞拍协议</a> </label>
-                    </div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="save-info">
-                        <label class="custom-control-label" for="save-info">保存地址下次使用</label>
                     </div>
                     <hr class="mb-4">
                     <button class="btn btn-primary btn-lg btn-block" id="buy_click" disabled type="submit">确认</button>
@@ -113,14 +102,13 @@
 <#include '../common/footer.ftl'>
 </body>
 <script src="${ctx}/js/jquery-3.1.1.min.js"></script>
+<script src="${ctx}js/popper.min.js"></script>
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
 <script>
     function protocolClick(obj) {
         var btn = $('#buy_click')[0];
-        console.log(btn.disabled);
-        console.log(obj.checked);
         btn.disabled = !obj.checked;
     }
 </script>

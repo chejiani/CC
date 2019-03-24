@@ -505,6 +505,7 @@
 <#include '../common/footer.ftl'>
 </body>
 <script src="${ctx}/js/jquery-3.1.1.min.js"></script>
+<script src="${ctx}js/popper.min.js"></script>
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/bootstrap-table/bootstrap-table.min.js"></script>

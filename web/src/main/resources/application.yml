@@ -6,6 +6,7 @@ spring:
     username: root
     password: spnor87858389
     driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
   jpa:
     hibernate:
       ddl-auto: update
@@ -32,9 +33,21 @@ spring:
   servlet:
     multipart:
       max-file-size: 20MB
+  mail:
+    host: smtp.qq.com
+    username: 2364672979@qq.com
+    password: 2324eewf
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
 logging:
   level:
     org.apache: info
     org.springframework: debug
 server:
   port: 7777
+debug: true

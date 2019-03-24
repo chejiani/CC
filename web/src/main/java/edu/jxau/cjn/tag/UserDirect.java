@@ -17,11 +17,17 @@ public class UserDirect implements TemplateDirectiveModel {
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
-        StringWriter stringWriter = new StringWriter();
         if (shiroUser == null){
             env.getOut().write("<a class=\"btn btn-link text-justify text-info\" href=\"\\user\\login\">登陆</a>");
         } else {
-            env.getOut().write("<a class=\"text-justify text-info\" href=\"#\">欢迎你: "+shiroUser.loginName+"</a>");
+            env.getOut().write("<div class=\"dropdown\">\n" +
+                    "  <button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
+                    "    欢迎你: "+shiroUser.loginName+"\n" +
+                    "  </button>\n" +
+                    "  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n" +
+                    "    <a class=\"dropdown-item\" href=\"\\user\\logout\">注销</a>\n" +
+                    "  </div>\n" +
+                    "</div>");
         }
     }
 
