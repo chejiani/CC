@@ -4,58 +4,106 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * 用户数据库对象
+ */
 @Entity
 public class User implements Serializable {
 
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userId;
 
+    /**
+     * 昵称
+     */
     @Column(length = 10)
     private String nickName;
 
+    /**
+     * 真实姓名
+     */
     @Column(length = 10)
     private String realName;
 
+    /**
+     * 密码
+     */
     @Column(length = 48)
     private String password;
 
+    /**
+     * 性别
+     */
     @Column(length = 2)
     private String gender;
 
+    /**
+     * E-mail地址
+     */
     @Column
     private String email;
 
+    /**
+     * 电话号码
+     */
     @Column(length = 14)
     private String mobile;
 
+    /**
+     * 地址
+     */
     @Column(length = 100)
     private String address;
 
+    /**
+     * 盐
+     */
     @Column(nullable = false)
     private String salt;
 
+    /**
+     * 创建日期
+     */
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDateTime = new Date();
 
+    /**
+     * 更新日期
+     */
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateDateTime;
 
+    /**
+     * 是否禁用
+     */
     @Column
     private boolean disable;
 
+    /**
+     * 角色,角色一个用户可以多个，因此，这里可以考虑多对一关系
+     */
     @ManyToOne
     @JoinColumn(name = "roleId",nullable = false, updatable = false)
     private Role role;
 
+    /**
+     * 持久化前操作，初始化船舰日期和更新日期
+     */
     @PrePersist
     public void prePersist(){
         this.createDateTime = new Date();
         this.updateDateTime = new Date();
     }
 
+    /**
+     * 更新前操作
+     */
     @PostUpdate
     public void preUpdate(){
         this.updateDateTime = new Date();

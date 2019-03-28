@@ -19,6 +19,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * 分布式作业统一配置。配置所有分片的作业和调度器实例
+ * @author jiani che
+ * @version 1.0.0
  */
 @Configuration
 public class JobConfig {
@@ -39,6 +41,14 @@ public class JobConfig {
         return new OrderCancelJob();
     }
 
+    /**
+     * 创建竞拍订单生成调度器
+     * @param bidJob 竞拍订单创建作业
+     * @param cron 调度表达式式
+     * @param shardingTotalCount 总分片数
+     * @param shardingItemParameters 分片参数
+     * @return 创建竞拍订单生成的调度器
+     */
     @Bean(initMethod = "init")
     public JobScheduler bidJobScheduler(@Autowired @Qualifier(value = "bidJob") final SimpleJob bidJob, @Value("${simpleJob.cron}") final String cron,
                                         @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
@@ -47,6 +57,14 @@ public class JobConfig {
                 cron, shardingTotalCount, shardingItemParameters), jobEventConfiguration);
     }
 
+    /**
+     * 创建调度取消调度器
+     * @param orderCancelJob 竞拍订单创建作业
+     * @param cron 调度表达式式
+     * @param shardingTotalCount 总分片数
+     * @param shardingItemParameters 分片参数
+     * @return 创建调度取消调度器的调度器
+     */
     @Bean(initMethod = "init")
     public JobScheduler orderCancelJobScheduler(@Autowired @Qualifier(value = "orderCancelJob")  final SimpleJob orderCancelJob, @Value("${simpleJob.cron}") final String cron,
                                         @Value("${simpleJob.shardingTotalCount}") final int shardingTotalCount,
@@ -55,6 +73,14 @@ public class JobConfig {
                 cron, shardingTotalCount, shardingItemParameters), jobEventConfiguration);
     }
 
+    /**
+     * 作业配置
+     * @param jobClass 作业对象
+     * @param cron 调度表达式
+     * @param shardingTotalCount 总分片数
+     * @param shardingItemParameters 分片参数
+     * @return 作业配置对象
+     */
     private LiteJobConfiguration getLiteJobConfiguration(final Class<? extends SimpleJob> jobClass, final String cron,
                                                          final int shardingTotalCount, final String shardingItemParameters) {
         JobCoreConfiguration jobCoreConfiguration = JobCoreConfiguration.newBuilder(

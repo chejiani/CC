@@ -6,6 +6,8 @@ import org.hibernate.engine.jdbc.env.spi.JdbcEnvironment;
 
 /**
  * 物理名称命名策略
+ * @author jiani che
+ * @version 1.0.0
  */
 public class DefaultPhysicalNamingStrategy implements PhysicalNamingStrategy {
 

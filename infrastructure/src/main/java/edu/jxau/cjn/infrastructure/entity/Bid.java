@@ -8,6 +8,11 @@ import java.math.BigDecimal;
 
 import javax.persistence.*;
 
+/**
+ * 竞拍数据库对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Entity
 public class Bid implements Serializable {
 
@@ -45,6 +50,9 @@ public class Bid implements Serializable {
     @Column(precision = 12, scale = 2)
     private BigDecimal currentReservePrice;
 
+    /**
+     * 竞拍状态
+     */
     @Column
     private int status;
 

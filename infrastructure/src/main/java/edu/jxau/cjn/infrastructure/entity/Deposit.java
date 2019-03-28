@@ -8,16 +8,25 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 押金数据库对象
+ * @author jiani che
+ * @version 1.0.0
+ */
+@Deprecated
 @Entity
 public class Deposit implements Serializable {
 
     /**
-     * 订单id
+     * 主键
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /**
+     * 用户
+     */
     @OneToOne
     @Fetch(FetchMode.JOIN)
     private User user;

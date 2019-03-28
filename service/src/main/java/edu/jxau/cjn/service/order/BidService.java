@@ -6,6 +6,7 @@ import edu.jxau.cjn.infrastructure.repositories.GoodsRepository;
 import edu.jxau.cjn.service.goods.GoodsService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

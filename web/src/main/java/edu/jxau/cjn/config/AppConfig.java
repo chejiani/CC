@@ -7,6 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 
+/**
+ * app全局配置
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Configuration
 public class AppConfig {
 

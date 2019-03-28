@@ -6,6 +6,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
+/**
+ * 竞拍数据库访问你对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 public interface BidRepository extends JpaRepository<Bid, Integer>, PagingAndSortingRepository<Bid, Integer> {
 
     /**

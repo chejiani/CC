@@ -20,9 +20,19 @@ import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * shiro配置，配置了shiro的主要过滤信息和安全策略
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Configuration
 public class ShiroConfig {
 
+    /**
+     * 设置过滤器
+     * @param securityManager
+     * @return
+     */
     @Bean
     @ConditionalOnClass(ShiroFilterFactoryBean.class)
     public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager){
@@ -35,6 +45,10 @@ public class ShiroConfig {
         return shiroFilterFactoryBean;
     }
 
+    /**
+     * 设置安全策略，基于url
+     * @return
+     */
     private Map<String, String> filterChainDefinition(){
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/static/**", "anon");
@@ -47,6 +61,13 @@ public class ShiroConfig {
         return filterChainDefinitionMap;
     }
 
+    /**
+     *
+     * 设置认证器
+     * @param credentialsMatcher
+     * @param userService
+     * @return
+     */
     @Bean
     @Primary
     public Realm realm(CredentialsMatcher credentialsMatcher, UserService userService){
@@ -56,6 +77,10 @@ public class ShiroConfig {
         return realm;
     }
 
+    /**
+     * 设置认证匹配
+     * @return
+     */
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();

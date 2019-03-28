@@ -3,6 +3,11 @@ package edu.jxau.cjn.config.security;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * shiro用户信息对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 public class ShiroUser implements Serializable {
     private static final long serialVersionUID = -1373760761780840081L;
     public String id;

@@ -9,7 +9,11 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-
+/**
+ * 商品数据库对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Entity
 public class Goods implements Serializable {
 
@@ -26,6 +30,9 @@ public class Goods implements Serializable {
     @Column(length = 30)
     private String goodsName;
 
+    /**
+     * 相册
+     */
     @OneToOne
     @Fetch(value = FetchMode.JOIN)
     private Album album;
@@ -36,6 +43,9 @@ public class Goods implements Serializable {
     @Column(length = 60)
     private String goodsDesc;
 
+    /**
+     * 商品描述
+     */
     @Column(columnDefinition = "longtext null")
     private String article;
 
@@ -92,6 +102,9 @@ public class Goods implements Serializable {
     @Column
     private int stock;
 
+    /**
+     * 持久化前操作，初始化库存
+     */
     @PrePersist
     public void prePersist(){
         if (stock <= 0){

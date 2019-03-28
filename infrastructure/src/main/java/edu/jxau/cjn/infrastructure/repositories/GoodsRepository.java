@@ -8,6 +8,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 商品数据库访问对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 public interface GoodsRepository extends JpaRepository<Goods, Long>, PagingAndSortingRepository<Goods, Long> {
 
     /**

@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * 运用初始化启动器，初始化运用运行必选参数，目前主要初始化用户角色信息
+ * @author jiani che
+ * @version 1.0.0
  */
 @Component
 public class ApplicationInitializer implements CommandLineRunner, Log {

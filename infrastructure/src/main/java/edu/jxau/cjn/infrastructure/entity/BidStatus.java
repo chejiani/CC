@@ -1,5 +1,10 @@
 package edu.jxau.cjn.infrastructure.entity;
 
+/**
+ * 竞拍状态枚举
+ * @author jiani che
+ * @version 1.0.0
+ */
 public enum BidStatus {
 
     /**

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * 自定义filter，实现Ajax请求可以跳转登陆
+ * @author jiani che
+ * @version 1.0.0
  */
 public class ShiroAuthcFilter extends FormAuthenticationFilter {
 

@@ -8,6 +8,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * 订单数据库对象
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Entity
 public class Order implements Serializable {
 
@@ -24,6 +29,9 @@ public class Order implements Serializable {
     @Column(length = 20, updatable = false)
     private String orderNo;
 
+    /**
+     * 地址
+     */
     @OneToOne
     @Fetch(FetchMode.JOIN)
     private Address address;
@@ -36,6 +44,9 @@ public class Order implements Serializable {
     @Fetch(FetchMode.JOIN)
     private Goods goods;
 
+    /**
+     * 归属用户
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "userId", updatable = false, nullable = false)
     @Fetch(FetchMode.JOIN)
@@ -65,21 +76,37 @@ public class Order implements Serializable {
     @Column(precision = 12, scale = 2)
     private int orderStatus;
 
+    /**
+     * 地址
+     */
     @Column(length = 200)
     private String addr;
 
+    /**
+     * 创建时间戳
+     */
     @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate = new Date();
 
+    /**
+     * 付款日期
+     */
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDate;
 
+    /**
+     * 付款截至日期
+     */
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date payDeadline;
 
+    /**
+     * 地址
+     * @return
+     */
     public Address getAddress() {
         return address;
     }

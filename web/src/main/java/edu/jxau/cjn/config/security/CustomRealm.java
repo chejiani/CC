@@ -20,6 +20,11 @@ import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * 自定义shiro认证器
+ * @author jiani che
+ * @version 1.0.0
+ */
 public class CustomRealm extends AuthorizingRealm implements Log {
 
     private UserService userService;

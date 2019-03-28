@@ -1,5 +1,10 @@
 package edu.jxau.cjn.infrastructure.entity;
 
+/**
+ * 订单状态枚举
+ * @author jiani che
+ * @version 1.0.0
+ */
 public enum OrderStatus {
     WAIT_PAY(1,"代支付"),
     WAIT_SHIP(2,"代发货"),

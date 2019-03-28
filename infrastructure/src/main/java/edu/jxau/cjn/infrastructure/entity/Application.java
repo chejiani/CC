@@ -3,6 +3,12 @@ package edu.jxau.cjn.infrastructure.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/**
+ * 用用数据库对象
+ * @author jiani che
+ * @version 1.0.0
+ */
+@Deprecated
 @Entity
 public class Application implements Serializable {
 
@@ -13,6 +19,9 @@ public class Application implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    /**
+     *
+     */
     @Column
     private String log;
 

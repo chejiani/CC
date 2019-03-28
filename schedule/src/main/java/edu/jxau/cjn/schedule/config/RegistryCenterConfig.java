@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 作业注册中心配置
+ * @author jiani che
+ * @version 1.0.0
+ */
 @Configuration
 @ConditionalOnExpression("'${regCenter.serverList}'.length() > 0")
 public class RegistryCenterConfig {

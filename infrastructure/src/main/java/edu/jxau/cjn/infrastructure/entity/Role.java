@@ -4,21 +4,36 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 
+/**
+ * 角色数据库对象
+ */
 @Entity
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 0L;
 
+    /**
+     * 主键
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /**
+     * 角色名
+     */
     @Column(length = 15)
     private String name;
 
+    /**
+     * 角色描述
+     */
     @Column(length = 20)
     private String description;
 
+    /**
+     * 是否预置角色
+     */
     @Column(nullable = false)
     private boolean preset;
 
