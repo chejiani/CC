@@ -20,18 +20,20 @@
             <#-- 图片展示区 -->
             <div class="col-4 justify-content-center shadow-lg">
                 <div class="p-5 bg-transparent">
-                    <div class="show-img" id="big-img" href="${ctx}/${albums[0]}">
-                        <#if albums??>
+                    <#if albums??>
+                        <div class="show-img" id="big-img" href="${ctx}/${albums[0]}">
                             <img src="${ctx}/${albums[0]}" id="show-img" alt="${albums[0]}">
-                        </#if>
-                    </div>
+                        </div>
+                    </#if>
                     <div class="small-img">
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
                         <div class="small-container">
                             <div id="small-img-roll">
-                                <#list albums as album>
-                                    <img src="${ctx}/${album}" class="show-small-img" alt="${album}">
-                                </#list>
+                                <#if albums??>
+                                    <#list albums as album>
+                                        <img src="${ctx}/${album}" class="show-small-img" alt="${album}">
+                                    </#list>
+                                </#if>
                             </div>
                         </div>
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-right" alt="" id="next-img">

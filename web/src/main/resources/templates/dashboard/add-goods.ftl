@@ -92,7 +92,9 @@
                             <div class="mb-3">
                                 <label for="editor" class="font-weight-bold">商品简介文档</label>
                                 <div id="editor">
-                                    ${goods.article}
+                                    <#if goods??>
+                                        ${goods.article!''}
+                                    </#if>
                                 </div>
                                 <input type="hidden" name="article" id="editor-input">
                             </div>

@@ -96,6 +96,7 @@ public class UserController {
     }
 
     @GetMapping(value = "manager/update/{id}")
+    @ResponseBody
     public boolean update(@PathVariable(value = "id") long id){
         return userService.update(id);
     }
@@ -107,6 +108,7 @@ public class UserController {
     }
 
     @GetMapping(value = "manager/add/role")
+    @ResponseBody
     public String addRole() {
         return "dashboard/add-role";
     }

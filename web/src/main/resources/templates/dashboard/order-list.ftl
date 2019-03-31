@@ -31,10 +31,10 @@
                         data-search="true">
                     <thead>
                     <tr>
-                        <th data-sortable="true" data-field="goodsName">商品名称</th>
-                        <th data-field="goodsDesc">商品描述</th>
-                        <th data-field="reservePrice">竞拍价</th>
-                        <th data-field="fixedPrice">一口价</th>
+                        <th data-sortable="true" data-field="goods.goodsName">商品名称</th>
+                        <th data-field="goods.goodsDesc">商品描述</th>
+                        <th data-field="goods.reservePrice">竞拍价</th>
+                        <th data-field="goods.fixedPrice">一口价</th>
                         <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
                         <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
                         <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
