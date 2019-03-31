@@ -24,9 +24,7 @@ public class UserDirect implements TemplateDirectiveModel {
                     "  <button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +
                     "    欢迎你: "+shiroUser.loginName+"\n" +
                     "  </button>\n" +
-                    "  <div class=\"dropdown-menu\" aria-labelledby=\"dropdownMenuButton\">\n" +
-                    "    <a class=\"dropdown-item\" href=\"\\user\\logout\">注销</a>\n" +
-                    "  </div>\n" +
+                    "  <a class=\"btn btn-info\" href=\"\\user\\logout\">注销</a>" +
                     "</div>");
         }
     }

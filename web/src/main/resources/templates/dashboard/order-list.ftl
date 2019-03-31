@@ -35,6 +35,7 @@
                         <th data-field="goods.goodsDesc">商品描述</th>
                         <th data-field="goods.reservePrice">竞拍价</th>
                         <th data-field="goods.fixedPrice">一口价</th>
+                        <th data-field="totalPrice">交易金额</th>
                         <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
                         <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
                         <th data-field="obtained" data-formatter="boolFormat">是否下架</th>

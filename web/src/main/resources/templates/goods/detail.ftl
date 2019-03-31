@@ -60,7 +60,7 @@
                                             <thead class="thead-light">
                                             <tr>
                                                 <th scope="col">截至日期</th>
-                                                <th scope="col">当前出价</th>
+                                                <th scope="col">当前底价</th>
                                                 <th scope="col">库存</th>
                                             </tr>
                                             </thead>

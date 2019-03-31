@@ -45,9 +45,6 @@ public class UserService implements Log {
 
     public boolean addRole(Role role) {
         if (null == roleRepository.findByName(role.getName())) {
-            if (null == roleRepository.findByPresetIsTrue()) {
-                role.setPreset(true);
-            }
             if (null != roleRepository.save(role)) {
                 return true;
             } else {
