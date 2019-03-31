@@ -25,11 +25,12 @@
                         data-search="true">
                     <thead>
                     <tr>
+                        <th data-field="orderNo">订单号</th>
                         <th data-sortable="true" data-field="goods.goodsName">商品名称</th>
                         <th data-field="goods.goodsDesc">商品描述</th>
                         <th data-field="goods.reservePrice">竞拍底价</th>
                         <th data-field="totalPrice">买入价</th>
-                        <th data-field="orderStatus">交易状态</th>
+                        <th data-field="orderStatus" data-formatter="orderstatusFormatter">交易状态</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>
@@ -67,6 +68,24 @@
             alert('付款成功');
             window.location.reload();
         })
+    }
+    function orderstatusFormatter(value, row, index) {
+        switch (row.orderStatus) {
+            case 0:
+                return '待支付';
+            case 1:
+                return '待发货';
+            case 2:
+                return '待签收';
+            case 3:
+                return '交易关闭';
+            case 4:
+                return '交易取消';
+            case 5:
+                return '交易结束';
+            default:
+                return '交易处理中';
+        }
     }
 </script>
 </html>
