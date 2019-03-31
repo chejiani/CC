@@ -42,7 +42,7 @@ public class UserController {
         if (subject.isAuthenticated()) {
             subject.logout();
         }
-        return "user/login";
+        return "/index";
     }
 
     @PostMapping(value = "login")

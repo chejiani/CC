@@ -56,8 +56,9 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/favicon.ico", "anon");
         filterChainDefinitionMap.put("/manager/**", "roles[admin]");
         filterChainDefinitionMap.put("*/manager/**", "roles[admin]");
-        filterChainDefinitionMap.put("/bid/**", "user");
-        filterChainDefinitionMap.put("/order/**", "user");
+        filterChainDefinitionMap.put("/bid/**", "roles[user]");
+        filterChainDefinitionMap.put("/order/**", "roles[user]");
+        filterChainDefinitionMap.put("user/logout", "logout");
         return filterChainDefinitionMap;
     }
 
