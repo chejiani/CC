@@ -21,9 +21,13 @@
             <div class="col-4 justify-content-center shadow-lg">
                 <div class="p-5 bg-transparent">
                     <#if albums??>
-                        <div class="show-img" id="big-img" href="${ctx}/${albums[0]}">
+                        <div class="show" id="big-img" href="${ctx}/${albums[0]}">
                             <img src="${ctx}/${albums[0]}" id="show-img" alt="${albums[0]}">
                         </div>
+                        <#else >
+                            <div class="show" id="big-img" href="${ctx}/asset/333.svg">
+                                <img src="${ctx}/asset/333.svg" id="show-img" alt="">
+                            </div>
                     </#if>
                     <div class="small-img">
                         <img src="${ctx}/asset/online_icon_right@2x.png" class="icon-left" alt="" id="prev-img">
@@ -101,7 +105,7 @@
 <#include '../common/footer.ftl'>
 </body>
 <script src="${ctx}/js/jquery-3.1.1.min.js"></script>
-<script src="${ctx}js/popper.min.js"></script>
+<script src="${ctx}/js/popper.min.js"></script>
 <script src="${ctx}/js/bootstrap.min.js"></script>
 <script src="${ctx}/js/bootstrap.bundle.min.js"></script>
 <script src="${ctx}/js/cjn.js"></script>
