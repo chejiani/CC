@@ -88,9 +88,9 @@
                             </li>
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-dark ">
-                                    <h6 class="my-0">当前竞拍价￥：</h6>
+                                    <h6 class="my-0">当前库存￥：</h6>
                                 </div>
-                                <span class="text-success">20</span>
+                                <span class="text-success">${goods.stock}</span>
                             </li>
                         </ul>
                     </div>

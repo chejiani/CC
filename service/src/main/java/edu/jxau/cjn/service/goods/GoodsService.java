@@ -32,26 +32,42 @@ public class GoodsService {
 
     public boolean save(Goods goods, String[] pics){
         try {
+            if (null == pics){
+                pics = new String[0];
+            }
             List<String> pic = Arrays.stream(pics)
                     .filter(StringUtils::isNoneBlank)
                     .map(item -> item.substring(item.lastIndexOf("\\") + 1))
                     .collect(Collectors.toList());
+            Album album;
             if (goods.getGoodsId() != 0){
-                Album album = albumRepository.getOne(goods.getGoodsId());
-                if (album != null){
+                Optional<Album> optionalAlbum = albumRepository.findById(goods.getGoodsId());
+                if (optionalAlbum.isPresent()){
+                    album = optionalAlbum.get();
                     album.setPicAddr(objectMapper.writeValueAsString(pic));
-                    album.setMainPic(pic.get(0));
+                    if (pic.size() > 0){
+                        album.setMainPic(pic.get(0));
+                    }
                     albumRepository.save(album);
+                    goods.setAlbum(album);
                 } else {
                     album = new Album();
                     album.setPicAddr(objectMapper.writeValueAsString(pic));
-                    album.setMainPic(pic.get(0));
+                    if (pic.size() > 0){
+                        album.setMainPic(pic.get(0));
+                    }
                     albumRepository.save(album);
+                    goods.setAlbum(album);
+                }
+            } else {
+                album = new Album();
+                album.setPicAddr(objectMapper.writeValueAsString(pic));
+                if (pic.size() > 0){
+                    album.setMainPic(pic.get(0));
                 }
                 albumRepository.save(album);
                 goods.setAlbum(album);
             }
-
             if (goods.getFixedPrice() == null || goods.getFixedPrice().compareTo(BigDecimal.ZERO) == 0){
                 goods.setFixed(false);
             } else {
@@ -63,6 +79,7 @@ public class GoodsService {
             goods = goodsRepository.save(goods);
             return goods != null;
         } catch (Exception e){
+            e.printStackTrace();
             return false;
         }
     }

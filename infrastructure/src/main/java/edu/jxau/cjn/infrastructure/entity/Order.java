@@ -39,8 +39,7 @@ public class Order implements Serializable {
     /**
      * 订单商品
      */
-    @OneToOne
-    @MapsId
+    @ManyToOne
     @Fetch(FetchMode.JOIN)
     private Goods goods;
 

@@ -50,10 +50,6 @@ public class BidService {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(UUID.randomUUID().toString().length());
-    }
-
     public void generateOrder() {
         List<Goods> goods = goodsRepository.findByAuctionDeadlineBeforeAndAuctionIsTrueAndObtainedIsFalseAndStockGreaterThan(new Date(), 0);
         if (goods != null && goods.size() > 0) {

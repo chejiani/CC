@@ -1,10 +1,12 @@
 package edu.jxau.cjn.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import edu.jxau.cjn.infrastructure.entity.Album;
 import edu.jxau.cjn.infrastructure.entity.Goods;
 import edu.jxau.cjn.infrastructure.entity.Order;
 import edu.jxau.cjn.service.goods.GoodsService;
 import edu.jxau.cjn.service.order.OrderService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -42,7 +44,10 @@ public class ManagerController {
         model.addAttribute("goods", goods);
         if (goods.getAlbum() != null){
             try {
-                model.addAttribute("albums", objectMapper.readValue(goods.getAlbum().getPicAddr(), List.class));
+                Album album = goods.getAlbum();
+                if (StringUtils.isNotBlank(album.getPicAddr())){
+                    model.addAttribute("albums", objectMapper.readValue(album.getPicAddr(), List.class));
+                }
             } catch (IOException e) {
                 model.addAttribute("albums", null);
             }

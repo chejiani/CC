@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 public class OrderService implements Log {
@@ -35,6 +37,8 @@ public class OrderService implements Log {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    private ExecutorService service = Executors.newFixedThreadPool(10);
 
     public void cancelOrder() {
         List<Order> orders = orderRepository.findByOrderStatusEqualsAndPayDeadlineIsBefore(OrderStatus.WAIT_PAY.getCode(), new Date());
@@ -98,12 +102,7 @@ public class OrderService implements Log {
             goods.setObtained(goods.getStock() <= 0);
             goodsRepository.save(goods);
             if (StringUtils.isNotBlank(user.getEmail())){
-                SimpleMailMessage mailMessage = new SimpleMailMessage();
-                mailMessage.setFrom("123456@cjn.com");
-                mailMessage.setTo(user.getEmail());
-                mailMessage.setSubject("订单创建成功通知");
-                mailMessage.setText("尊敬的"+ user.getNickName()+"您好，你购买的"+goods.getGoodsName() + "已成功创建订单");
-                mailSender.send(mailMessage);
+                service.execute(new Sender(user, goods));
             }
         } else {
             throw new RuntimeException("用户不存在");
@@ -121,6 +120,27 @@ public class OrderService implements Log {
         order.setAddress(address);
         order.setPayDate(new Date());
         createOrder(order, goodsId, userId);
+    }
+
+    private class Sender implements Runnable {
+
+        private User user;
+        private Goods goods;
+
+        public Sender(User user, Goods goods) {
+            this.user = user;
+            this.goods = goods;
+        }
+
+        @Override
+        public void run() {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setFrom("2364672979@qq.com");
+            mailMessage.setTo(user.getEmail());
+            mailMessage.setSubject("订单创建成功通知");
+            mailMessage.setText("尊敬的"+ user.getNickName()+"您好，你购买的"+goods.getGoodsName() + "已成功创建订单");
+            mailSender.send(mailMessage);
+        }
     }
 
 }

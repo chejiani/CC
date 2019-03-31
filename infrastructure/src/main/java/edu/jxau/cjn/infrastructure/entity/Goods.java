@@ -6,6 +6,7 @@ import org.hibernate.annotations.FetchMode;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -101,6 +102,10 @@ public class Goods implements Serializable {
      */
     @Column
     private int stock;
+
+    @OneToMany(orphanRemoval = false)
+    @JoinColumn(name = "goods_id")
+    private Set<Order> orders;
 
     /**
      * 持久化前操作，初始化库存

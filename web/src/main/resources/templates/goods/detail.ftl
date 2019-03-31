@@ -59,16 +59,16 @@
                                         <table class="table">
                                             <thead class="thead-light">
                                             <tr>
-                                                <th scope="col">底价</th>
+                                                <th scope="col">截至日期</th>
                                                 <th scope="col">当前出价</th>
-                                                <th scope="col">竞拍人数</th>
+                                                <th scope="col">库存</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
+                                                <td class="text-danger">${goods.auctionDeadline}</td>
                                                 <td>${goods.reservePrice}</td>
-                                                <td class="text-danger">135.00</td>
-                                                <td>3</td>
+                                                <td>${goods.stock}</td>
                                             </tr>
                                             </tbody>
                                         </table>
