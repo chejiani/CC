@@ -74,7 +74,7 @@ public class BidService {
                     orderService.createOrder(order, bid.getGoods().getGoodsId(), bid.getUser().getUserId());
                     if (StringUtils.isNotBlank(bid.getUser().getEmail())){
                         SimpleMailMessage mailMessage = new SimpleMailMessage();
-                        mailMessage.setFrom("123456@cjn.com");
+                        mailMessage.setFrom("2364672979@qq.com");
                         mailMessage.setTo(bid.getUser().getEmail());
                         mailMessage.setSubject("竞拍成功通知");
                         mailMessage.setText("尊敬的"+ bid.getUser().getNickName()+"您好，你出价的"+bid.getGoods().getGoodsName() + "已成功竞拍,请付款并完成地址补全。");
