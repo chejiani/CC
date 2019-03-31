@@ -74,7 +74,7 @@ public class GoodsService {
                 goods.setFixed(true);
             }
             Calendar calendar = Calendar.getInstance();
-            calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 1);
+            calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 3);
             goods.setAuctionDeadline(calendar.getTime());
             goods = goodsRepository.save(goods);
             return goods != null;
