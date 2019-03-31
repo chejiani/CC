@@ -42,10 +42,16 @@ public class BidService {
             bid.setStatus(BidStatus.AUCTIONING.ordinal());
             bid.setUser(user);
             bidRepository.save(bid);
+            goods.setReservePrice(goods.getReservePrice().add(bid.getPrice()));
+            goodsRepository.save(goods);
             return true;
         } else {
             return false;
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UUID.randomUUID().toString().length());
     }
 
     public void generateOrder() {

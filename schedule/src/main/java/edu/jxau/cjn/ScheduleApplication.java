@@ -17,5 +17,4 @@ public class ScheduleApplication {
         return new ObjectMapper();
     }
 
-
 }

@@ -26,7 +26,7 @@ public class Order implements Serializable {
     /**
      * 订单编号
      */
-    @Column(length = 20, updatable = false)
+    @Column(length = 40, updatable = false)
     private String orderNo;
 
     /**
