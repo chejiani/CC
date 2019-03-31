@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.jxau.cjn.infrastructure.entity.Goods;
 import edu.jxau.cjn.service.Log;
 import edu.jxau.cjn.service.goods.GoodsService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,14 +37,17 @@ public class HomeController implements Log {
         return "index";
     }
 
-    @GetMapping(value = "search/{keyWords}")
-    public String search(@PathVariable(name = "keyWords") String keyWords, Model model) {
-        List<Goods> goodsList = goodsService
-                .getAlL()
-                .parallelStream()
-                .filter(item -> !item.isObtained() && item.getStock() > 0)
-                .collect(Collectors.toList());
-        model.addAttribute("goodsList", goodsList);
+    @GetMapping(value = "search")
+    public String search(String keyWords, Model model) {
+        if (!StringUtils.isBlank(keyWords)){
+            List<Goods> goodsList = goodsService
+                    .getAlL()
+                    .parallelStream()
+                    .filter(item -> !item.isObtained() && item.getStock() > 0)
+                    .filter(item -> keyWords.contains(item.getGoodsName()) || keyWords.contains(item.getGoodsDesc()))
+                    .collect(Collectors.toList());
+            model.addAttribute("goodsList", goodsList);
+        }
         return "goods/search";
     }
 

@@ -5,9 +5,9 @@
             <a class="p-2 text-dark" href="${ctx}/order/list">我的订单</a>
             <a class="p-2 text-dark" href="#">客服</a>
         </nav>
-        <form class="form-inline mt-2 mt-md-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="搜索关键字" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">找找看</button>
+        <form class="form-inline mt-2 mt-md-0" action="${ctx}/search/">
+            <input class="form-control mr-sm-2" name="keywords" type="text" placeholder="搜索关键字" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="submit">找找看</button>
         </form>
         <@login/>
     </div>

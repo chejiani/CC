@@ -66,17 +66,19 @@
     function orderstatusFormatter(value, row, index) {
         switch (row.orderStatus) {
             case 0:
-                return '代支付';
+                return '待支付';
             case 1:
-                return '代发货';
+                return '待发货';
             case 2:
-                return '代签收';
+                return '待签收';
             case 3:
                 return '交易关闭';
             case 4:
                 return '交易取消';
             case 5:
                 return '交易结束';
+            default:
+                return '交易处理中';
         }
     }
 </script>

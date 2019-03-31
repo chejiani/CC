@@ -18,7 +18,7 @@ public class UserDirect implements TemplateDirectiveModel {
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         if (shiroUser == null){
-            env.getOut().write("<a class=\"btn btn-link text-justify text-info\" href=\"\\user\\login\">登陆</a>");
+            env.getOut().write("<a class=\"btn btn-link text-justify text-info\" href=\"\\user\\login\">登录</a>");
         } else {
             env.getOut().write("<div class=\"dropdown\">\n" +
                     "  <button class=\"btn btn-link dropdown-toggle\" type=\"button\" id=\"dropdownMenuButton\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n" +

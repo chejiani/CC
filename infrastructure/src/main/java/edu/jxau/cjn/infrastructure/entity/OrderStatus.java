@@ -6,9 +6,9 @@ package edu.jxau.cjn.infrastructure.entity;
  * @version 1.0.0
  */
 public enum OrderStatus {
-    WAIT_PAY(1,"代支付"),
-    WAIT_SHIP(2,"代发货"),
-    WAIT_SIGNING(3,"代签收"),
+    WAIT_PAY(1,"待支付"),
+    WAIT_SHIP(2,"待发货"),
+    WAIT_SIGNING(3,"待签收"),
     CLOSE(4,"交易关闭"),
     CANCEL(5,"交易取消"),
     END(6,"交易结束");
