@@ -39,12 +39,12 @@ public class ApplicationInitializer implements CommandLineRunner, Log {
             User user = new User();
             String salt = EncryptUtil.generateSalt(16);
             user.setSalt(Hex.encodeHexString(salt.getBytes()));
-            user.setPassword(Hex.encodeHexString(EncryptUtil.Sha1(salt.getBytes(), user.getPassword().getBytes(), 0)));
             user.setRole(role);
             user.setEmail("123@mail.com");
             user.setNickName("admin");
             user.setPassword("1234567890");
             user.setMobile("000000000");
+            user.setPassword(Hex.encodeHexString(EncryptUtil.Sha1(salt.getBytes(), user.getPassword().getBytes(), 0)));
             userRepository.save(user);
 
             role = new Role();

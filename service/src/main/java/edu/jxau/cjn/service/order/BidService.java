@@ -54,7 +54,7 @@ public class BidService {
         List<Goods> goods = goodsRepository.findByAuctionDeadlineBeforeAndAuctionIsTrueAndObtainedIsFalseAndStockGreaterThan(new Date(), 0);
         if (goods != null && goods.size() > 0) {
             goods.forEach(item -> {
-                List<Bid> bids = bidRepository.findByGoodsEquals(item.getGoodsId());
+                List<Bid> bids = bidRepository.findByGoodsEquals(item);
                 if (bids != null && bids .size() > 0){
                     Bid bid = bids.stream()
                             .max(Comparator.comparing(Bid::getPrice))

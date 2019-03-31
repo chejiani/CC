@@ -1,6 +1,7 @@
 package edu.jxau.cjn.infrastructure.repositories;
 
 import edu.jxau.cjn.infrastructure.entity.Bid;
+import edu.jxau.cjn.infrastructure.entity.Goods;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -18,6 +19,6 @@ public interface BidRepository extends JpaRepository<Bid, Integer>, PagingAndSor
      * @param id 商品id
      * @return 满足条件的商品
      */
-    List<Bid> findByGoodsEquals(long id);
+    List<Bid> findByGoodsEquals(Goods id);
 
 }
