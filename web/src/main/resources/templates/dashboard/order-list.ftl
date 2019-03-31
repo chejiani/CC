@@ -32,14 +32,16 @@
                     <thead>
                     <tr>
                         <th data-sortable="true" data-field="goods.goodsName">商品名称</th>
+                        <th data-field="orderNo">订单号</th>
+                        <th data-field="orderStatus" data-formatter="orderstatusFormatter">订单状态</th>
                         <th data-field="goods.goodsDesc">商品描述</th>
-                        <th data-field="goods.reservePrice">竞拍价</th>
-                        <th data-field="goods.fixedPrice">一口价</th>
                         <th data-field="totalPrice">交易金额</th>
-                        <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
-                        <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
+                        <th data-field="address.contact">收货人</th>
+                        <th data-field="address.addr">收货地址</th>
+                        <th data-field="address.contactPhone">收货人联系电话</th>
                         <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
-                        <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
+                        <th data-field="createDate">订单创建日期</th>
+                        <th data-field="payDeadline">付款截至日期</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>
                     </thead>
@@ -57,10 +59,25 @@
 <script src="${ctx}/js/cjn.js"></script>
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
-        /*var html = "<a href='#' class='btn btn-default'><i class='fas fa-eye'></i> 查看</a>"
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-edit'></i> 编辑</a>"
-        html += "<a href='#' class='btn btn-default'><i class='fas fa-times'></i> 删除</a>"
-        return html;*/
+        if (row.orderStatus !== 4 && row.orderStatus !== 5 && row.orderStatus !== 3){
+            return "<a href='${ctx}/oper/"+row.id+"/2' class='btn btn-default'><i class='fas fa-times'></i> 取消</a>";
+        }
+    }
+    function orderstatusFormatter(value, row, index) {
+        switch (row.orderStatus) {
+            case 0:
+                return '代支付';
+            case 1:
+                return '代发货';
+            case 2:
+                return '代签收';
+            case 3:
+                return '交易关闭';
+            case 4:
+                return '交易取消';
+            case 5:
+                return '交易结束';
+        }
     }
 </script>
 </html>

@@ -34,8 +34,10 @@
                         <th data-field="realName">实名</th>
                         <th data-field="gender">性别</th>
                         <th data-field="mobile">电话号码</th>
+                        <th data-field="email">e-mail</th>
                         <th data-field="address">通讯地址</th>
                         <th data-field="disable">是否禁用</th>
+                        <th data-field="role.description">角色</th>
                         <th data-field="createDateTime">创建日期</th>
                         <th data-field="updateDateTime">上次更新日期</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
