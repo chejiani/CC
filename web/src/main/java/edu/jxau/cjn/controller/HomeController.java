@@ -44,7 +44,7 @@ public class HomeController implements Log {
                     .getAlL()
                     .parallelStream()
                     .filter(item -> !item.isObtained() && item.getStock() > 0)
-                    .filter(item -> keyWords.contains(item.getGoodsName()) || keyWords.contains(item.getGoodsDesc()))
+                    .filter(item -> item.getGoodsName().contains(keyWords) || item.getGoodsDesc().contains(keyWords))
                     .collect(Collectors.toList());
             model.addAttribute("goodsList", goodsList);
         }

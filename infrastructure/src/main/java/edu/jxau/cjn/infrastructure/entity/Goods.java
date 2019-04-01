@@ -29,7 +29,7 @@ public class Goods implements Serializable {
      * 商品名称
      */
     @Column(length = 30)
-    private String goodsName;
+    private String goodsName = "";
 
     /**
      * 相册
@@ -42,7 +42,7 @@ public class Goods implements Serializable {
      * 商品描述
      */
     @Column(length = 60)
-    private String goodsDesc;
+    private String goodsDesc = "";
 
     /**
      * 商品描述

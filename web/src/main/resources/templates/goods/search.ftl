@@ -17,7 +17,8 @@
     <div class="container-fluid">
         <div class="row pl-xl-5">
             <#if goodsList??>
-                <#list goodsList as goods>
+                <#if goodsList?size != 0>
+                    <#list goodsList as goods>
                     <div class="col-md-3 card-deck">
                         <div class="card mb-4 shadow-sm">
                             <img src="${ctx}/${goods.album.mainPic!''}" alt="${goods.goodsName}" width="100%" height="225">
@@ -51,6 +52,13 @@
                         </div>
                     </div>
                 </#list>
+                <#else >
+                <div class="col-md-12 text-center">
+                    <h5 style="color: rgba(89,188,238,0.9)">这里空空如也</h5>
+                </div>
+                </#if>
+                <#else >
+                <p style="color: rgba(40,43,56,0.9)">这里空空如也</p>
             </#if>
         </div>
     </div>
