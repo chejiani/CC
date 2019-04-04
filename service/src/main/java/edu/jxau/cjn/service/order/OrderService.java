@@ -79,6 +79,10 @@ public class OrderService implements Log {
         }
     }
 
+    public Order getOne(long id){
+        return orderRepository.findById(id).orElse(null);
+    }
+
     public void createOrder(Order order, long goodsId, long userId){
         Goods goods =  goodsRepository.findById(goodsId).orElse(null);
         if (goods == null || goods.getStock() <= 0){
@@ -119,7 +123,21 @@ public class OrderService implements Log {
         address = addressRepository.save(address);
         order.setAddress(address);
         order.setPayDate(new Date());
+        order.setOrderStatus(OrderStatus.WAIT_SHIP.getCode());
         createOrder(order, goodsId, userId);
+    }
+
+    public void supplement(Address address, long id){
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (!optionalOrder.isPresent()){
+            throw new RuntimeException();
+        }
+        Order order = optionalOrder.get();
+        address = addressRepository.save(address);
+        order.setAddress(address);
+        order.setOrderStatus(OrderStatus.WAIT_SHIP.getCode());
+        orderRepository.save(order);
+
     }
 
     private class Sender implements Runnable {

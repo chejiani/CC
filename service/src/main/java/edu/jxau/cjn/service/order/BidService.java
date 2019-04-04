@@ -60,7 +60,7 @@ public class BidService {
                             .max(Comparator.comparing(Bid::getPrice))
                             .get();
                     Order order = new Order();
-                    order.setOrderStatus(OrderStatus.WAIT_PAY.getCode());
+                    order.setOrderStatus(OrderStatus.PRE.getCode());
                     order.setGoods(bid.getGoods());
                     order.setQuantity(1);
                     order.setUnitPrice(bid.getPrice());

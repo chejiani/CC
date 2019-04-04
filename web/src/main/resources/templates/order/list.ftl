@@ -49,7 +49,11 @@
 <script src="${ctx}/js/cjn.js"></script>
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
-        if (row.orderStatus === 1){
+
+        if (row.orderStatus === 0){
+            var html = "<a href='#' class='btn btn-default' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
+            return html + "<a href='${ctx}/supplement" + row.id+"' class='btn btn-default'><i class='fas fa-eye'></i> 补充地址</a>";
+        } else if (row.orderStatus === 1){
             var html = "<a href='#' class='btn btn-default' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
             return html + "<a href='#' class='btn btn-default' onclick='doPay("+row.id+")'><i class='fas fa-eye'></i> 付款</a>";
         } else if (row.orderStatus === 2) {
@@ -69,22 +73,27 @@
             window.location.reload();
         })
     }
+    function doSupplement(obj) {
+        $.get("${ctx}/supplement/" + obj, function () {
+            window.location.reload();
+        })
+    }
     function orderstatusFormatter(value, row, index) {
         switch (row.orderStatus) {
             case 0:
-                return '待支付';
+                return '待补充地址';
             case 1:
-                return '待发货';
+                return '待支付';
             case 2:
-                return '待签收';
+                return '待发货';
             case 3:
-                return '交易关闭';
+                return '待签收';
             case 4:
-                return '交易取消';
+                return '交易关闭';
             case 5:
-                return '交易结束';
+                return '交易取消';
             default:
-                return '交易处理中';
+                return '交易结束';
         }
     }
 </script>

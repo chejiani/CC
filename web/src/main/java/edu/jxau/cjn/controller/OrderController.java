@@ -31,9 +31,9 @@ public class OrderController {
     }
 
     @GetMapping(value = "create/{goodsId}")
-    public String createOrder(@PathVariable(value = "goodsId") String goodsId, Model model){
+    public String createOrder(@PathVariable(value = "goodsId") String goodsId, Model model) {
         Goods goods = goodsService.getOne(Long.valueOf(goodsId));
-        if (goods == null){
+        if (goods == null) {
             return "redirect:404";
         } else {
             model.addAttribute("goods", goodsService.getOne(Long.valueOf(goodsId)));
@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "create")
-    public String createOrder(Order order, Address address, long goodsId){
+    public String createOrder(Order order, Address address, long goodsId) {
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         orderService.createOrder(order, address, goodsId, Long.parseLong(shiroUser.id));
         return "order/pay";
@@ -50,15 +50,15 @@ public class OrderController {
 
     @GetMapping(value = "oper/{id}/{code}")
     public boolean oper(@PathVariable(value = "code") int code,
-                        @PathVariable(value = "id") long id){
-        if (1 == code){
+                        @PathVariable(value = "id") long id) {
+        if (1 == code) {
             return true;
         }
-        if (2 == code){
+        if (2 == code) {
             try {
                 orderService.cancelOrder(id);
                 return true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 return false;
             }
@@ -67,27 +67,43 @@ public class OrderController {
     }
 
     @GetMapping(value = "/manager/list/order")
-    public String orderList(){
+    public String orderList() {
         return "dashboard/order-list";
     }
 
     @GetMapping(value = "/manager/list/order/data")
     @ResponseBody
-    public List<Order> getOrderList(){
+    public List<Order> getOrderList() {
         return orderService.getGoodsWithPagination(PageRequest.of(0, 10)).getContent();
     }
 
     @GetMapping(value = "list/data")
     @ResponseBody
-    public List<Order> getOrderListForUser(){
+    public List<Order> getOrderListForUser() {
         ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
         return orderService.findUsersOrder(Long.parseLong(shiroUser.id));
     }
 
     @PostMapping(value = "manager/update/order")
     @ResponseBody
-    public boolean update(Order order){
+    public boolean update(Order order) {
         return orderService.update(order);
+    }
+
+    @GetMapping(value = "supplement/{order}")
+    public String supplementorderInfo(@PathVariable(value = "order") long order, Model model) {
+        Order orderModel = orderService.getOne(order);
+        if (orderModel == null){
+            throw new IllegalArgumentException("订单不存在");
+        }
+        model.addAttribute("order", orderModel);
+        return "order/supplementOrderInfo";
+    }
+
+    @PostMapping(value = "supplement")
+    public String saveSupplement(Address address, long order) {
+        orderService.supplement(address, order);
+        return "order/pay";
     }
 
 }

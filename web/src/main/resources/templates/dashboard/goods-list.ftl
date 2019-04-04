@@ -40,8 +40,6 @@
                         <th data-field="reservePrice">竞拍价</th>
                         <th data-field="stock">库存</th>
                         <th data-field="fixedPrice">一口价</th>
-                        <th data-field="fixed" data-formatter="boolFormat">允许一口价</th>
-                        <th data-field="auction" data-formatter="boolFormat">允许竞拍</th>
                         <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
                     </tr>

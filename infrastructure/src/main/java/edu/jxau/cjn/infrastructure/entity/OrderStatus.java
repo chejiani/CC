@@ -6,6 +6,7 @@ package edu.jxau.cjn.infrastructure.entity;
  * @version 1.0.0
  */
 public enum OrderStatus {
+    PRE(0, "待补充地址"),
     WAIT_PAY(1,"待支付"),
     WAIT_SHIP(2,"待发货"),
     WAIT_SIGNING(3,"待签收"),

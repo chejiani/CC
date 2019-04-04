@@ -52,7 +52,12 @@
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" disabled type="submit">去支付</button>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="protocol" onclick="protocolClick(this)">
+                        <label class="custom-control-label" for="protocol"><a href="#" class="text-danger">同意竞拍协议</a> </label>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" disabled type="submit">确认</button>
                 </form>
             </div>
             <div class="col-lg-3 w-75">
@@ -60,8 +65,8 @@
                     <a href="${ctx}/details/${goods.goodsId}">
                         <#if goods.album??>
                             <img alt="" src="${ctx}/${goods.album.mainPic!''}" width="100%" height="225">
-                            <#else >
-                                <img alt="" src="#" width="100%" height="225">
+                        <#else >
+                            <img alt="" src="#" width="100%" height="225">
                         </#if>
                     </a>
                     <div class="card-body">
@@ -119,5 +124,9 @@
             });
         }, false);
     })();
+    function protocolClick(obj) {
+        var btn = $('#buy_click')[0];
+        btn.disabled = !obj.checked;
+    }
 </script>
 </html>
