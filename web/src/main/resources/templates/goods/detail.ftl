@@ -61,14 +61,12 @@
                                             <tr>
                                                 <th scope="col">截至日期</th>
                                                 <th scope="col">当前底价</th>
-                                                <th scope="col">库存</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td class="text-danger">${goods.auctionDeadline}</td>
                                                 <td>${goods.reservePrice}</td>
-                                                <td>${goods.stock}</td>
                                             </tr>
                                             </tbody>
                                         </table>
