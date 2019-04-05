@@ -101,7 +101,7 @@ public class Goods implements Serializable {
      * 库存
      */
     @Column
-    private int stock;
+    private int stock = 1;
 
     @OneToMany(orphanRemoval = false)
     @JoinColumn(name = "goods_id")

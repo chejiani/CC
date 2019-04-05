@@ -79,15 +79,6 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="firstName">库存</label>
-                                    <input type="number" class="form-control" name="stock" id="stock"
-                                           placeholder="" value="${goods.stock!'1'}"
-                                           required="">
-                                </div>
-                            </div>
-
                             <hr class="mb-4"/>
                             <div class="mb-3">
                                 <label for="editor" class="font-weight-bold">商品简介文档</label>

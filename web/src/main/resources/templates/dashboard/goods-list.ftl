@@ -38,7 +38,6 @@
                         <th data-sortable="true" data-field="goodsName">商品名称</th>
                         <th data-field="goodsDesc">商品描述</th>
                         <th data-field="reservePrice">竞拍价</th>
-                        <th data-field="stock">库存</th>
                         <th data-field="fixedPrice">一口价</th>
                         <th data-field="obtained" data-formatter="boolFormat">是否下架</th>
                         <th data-field="operation" data-formatter="operateFormatter">操作</th>
