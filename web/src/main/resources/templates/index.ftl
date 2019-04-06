@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <#assign ctx=request.contextPath/>
-<#assign seq = ["foo", "bar", "baz", "qwe", "foo", "bar", "baz", "qwe", "foo", "bar", "bar", "baz", "qwe", "foo", "bar"]>
+<#assign seq = ["foo", "bar", "baz", "qwe", "foo"]>
 <html lang="zn_CH">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
