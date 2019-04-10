@@ -122,9 +122,16 @@ public class OrderService implements Log {
         }
         address = addressRepository.save(address);
         order.setAddress(address);
-        order.setPayDate(new Date());
-        order.setOrderStatus(OrderStatus.WAIT_SHIP.getCode());
-        createOrder(order, goodsId, userId);
+        Optional<Order> optionalOrder = orderRepository.findById(order.getId());
+        if (!optionalOrder.isPresent()){
+            createOrder(order, goodsId, userId);
+        } else {
+            order = optionalOrder.get();
+            order.setPayDate(new Date());
+            order.setOrderStatus(OrderStatus.WAIT_SHIP.getCode());
+            order.setPayDeadline(new Date());
+            orderRepository.save(order);
+        }
     }
 
     public void supplement(Address address, long id){

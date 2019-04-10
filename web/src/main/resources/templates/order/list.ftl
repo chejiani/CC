@@ -51,13 +51,13 @@
     function operateFormatter(value, row, index) {
         var html = '';
         if (row.orderStatus === 0){
-            html = "<a href='#' class='btn btn-default' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
-            return html + "<a href='${ctx}/supplement" + row.id+"' class='btn btn-default'><i class='fas fa-eye'></i> 补充地址</a>";
+            html = "<a href='#' class='btn btn-danger' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
+            return html + "<a href='${ctx}/order/supplement/" + row.id+"' class='btn btn-info'><i class='fas fa-eye'></i> 补充地址</a>";
         } else if (row.orderStatus === 1){
-            html = "<a href='#' class='btn btn-default' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
-            return html + "<a href='#' class='btn btn-default' onclick='doPay("+row.id+")'><i class='fas fa-eye'></i> 付款</a>";
+            html = "<a href='#' class='btn btn-danger' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
+            return html + "<a href='#' class='btn btn-info' onclick='doPay("+row.id+")'><i class='fas fa-eye'></i> 付款</a>";
         } else if (row.orderStatus === 2) {
-            return html + "<a href='#' class='btn btn-default' onclick='doCancel(\"+row.id+\")'><i class='fas fa-eye'></i> 取消</a>";
+            return html + "<a href='#' class='btn btn-danger' onclick='doCancel(\"+row.id+\")'><i class='fas fa-eye'></i> 取消</a>";
         }
     }
 

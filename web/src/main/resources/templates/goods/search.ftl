@@ -45,8 +45,8 @@
                             </div>
                             <div class="card-footer">
                                 <div class="btn-group justify-content-between align-items-center float-right" role="group">
-                                    <a href="#" goods_no="${s.goodsId}" class="btn btn-sm btn-outline-dark bid_click">叫价</a>
-                                    <a href="${ctx}/order/create/${s.goodsId}" class="btn btn-sm btn-success">买入</a>
+                                    <a href="#" goods_no="${goods.goodsId}" class="btn btn-sm btn-outline-dark bid_click">叫价</a>
+                                    <a href="${ctx}/order/create/${goods.goodsId}" class="btn btn-sm btn-success">买入</a>
                                 </div>
                             </div>
                         </div>

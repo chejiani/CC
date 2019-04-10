@@ -25,7 +25,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-7 px-lg-5">
                 <form class="needs-validation" novalidate method="post" action="${ctx}/order/create">
-                    <input type="hidden" value="${goods.goodsId}" name="goodsId"/>
+                    <input type="hidden" value="${order.id}" name="id"/>
+                    <input type="hidden" value="${order.goods.goodsId}" name="goodsId"/>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="firstName">联系人：</label>
@@ -52,40 +53,40 @@
                     </div>
 
                     <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" disabled type="submit">确认</button>
+                    <button class="btn btn-primary btn-lg btn-block" id="buy_click" type="submit">确认</button>
                 </form>
             </div>
             <div class="col-lg-3 w-75">
                 <div class="card" style="width: 18rem;">
-                    <a href="${ctx}/details/${goods.goodsId}">
-                        <#if goods.album??>
-                            <img alt="" src="${ctx}/${goods.album.mainPic!''}" width="100%" height="225">
+                    <a href="${ctx}/details/${order.goods.goodsId}">
+                        <#if order.goods.album??>
+                            <img alt="" src="${ctx}/${order.goods.album.mainPic!''}" width="100%" height="225">
                         <#else >
                             <img alt="" src="#" width="100%" height="225">
                         </#if>
                     </a>
                     <div class="card-body">
-                        <a href="${ctx}/details/${goods.goodsId}" class="text-info text-decoration-none">
-                            <h6 class="card-title">${goods.goodsName}</h6>
+                        <a href="${ctx}/details/${order.goods.goodsId}" class="text-info text-decoration-none">
+                            <h6 class="card-title">${order.goods.goodsName}</h6>
                         </a>
                         <ul class="list-group">
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-dark">
                                     <h6 class="my-0">一口价￥：</h6>
                                 </div>
-                                <span class="text-success">${goods.fixedPrice}</span>
+                                <span class="text-success">${order.goods.fixedPrice}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-dark">
                                     <h6 class="my-0">竞拍底价￥：</h6>
                                 </div>
-                                <span class="text-success">${goods.reservePrice}</span>
+                                <span class="text-success">${order.goods.reservePrice}</span>
                             </li>
                             <li class="list-group-item d-flex justify-content-between bg-light">
                                 <div class="text-dark ">
                                     <h6 class="my-0">当前库存￥：</h6>
                                 </div>
-                                <span class="text-success">${goods.stock}</span>
+                                <span class="text-success">${order.goods.stock}</span>
                             </li>
                         </ul>
                     </div>
