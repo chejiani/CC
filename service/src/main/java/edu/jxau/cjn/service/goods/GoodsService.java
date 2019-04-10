@@ -40,7 +40,9 @@ public class GoodsService {
                     .map(item -> item.substring(item.lastIndexOf("\\") + 1))
                     .collect(Collectors.toList());
             Album album;
-            if (goods.getGoodsId() != 0){
+            Optional<Goods> optionalGoods = goodsRepository.findById(goods.getGoodsId());
+            if (optionalGoods.isPresent()){
+                Goods goodsNew = optionalGoods.get();
                 Optional<Album> optionalAlbum = albumRepository.findById(goods.getGoodsId());
                 if (optionalAlbum.isPresent()){
                     album = optionalAlbum.get();
@@ -58,6 +60,13 @@ public class GoodsService {
                     }
                     albumRepository.save(album);
                     goods.setAlbum(album);
+                    goodsNew.setAlbum(album);
+                    goodsNew.setGoodsDesc(goods.getGoodsDesc());
+                    goodsNew.setGoodsName(goods.getGoodsName());
+                    goodsNew.setArticle(goods.getArticle());
+                    goodsNew.setFixedPrice(goods.getFixedPrice());
+                    goodsNew.setReservePrice(goods.getReservePrice());
+                    goods = goodsNew;
                 }
             } else {
                 album = new Album();
@@ -76,7 +85,7 @@ public class GoodsService {
             Calendar calendar = Calendar.getInstance();
             calendar.set(Calendar.DATE, calendar.get(Calendar.DATE) + 3);
             goods.setAuctionDeadline(calendar.getTime());
-            goods = goodsRepository.save(goods);
+            goods = goodsRepository.saveAndFlush(goods);
             return goods != null;
         } catch (Exception e){
             e.printStackTrace();

@@ -60,8 +60,8 @@
                             <hr class="mb-3"/>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="firstName">一口价(<B style="color: #ff0000">留空则不允许一口价成交</B>)</label>
-                                    <input type="number" class="form-control" name="fixedPrice" id="firstName"
+                                    <label for="firstName">一口价</label>
+                                    <input type="text" class="form-control" name="fixedPrice" id="firstName"
                                            placeholder="" value="${goods.fixedPrice!''}"
                                            required="">
                                     <div class="invalid-feedback">
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="lastName">竞拍底价</label>
-                                    <input type="number" class="form-control" name="reservePrice" id="lastName"
+                                    <input type="text" class="form-control" name="reservePrice" id="lastName"
                                            placeholder="" value="${goods.reservePrice!''}"
                                            required="">
                                     <div class="invalid-feedback">
