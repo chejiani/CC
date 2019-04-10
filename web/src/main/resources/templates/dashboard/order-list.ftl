@@ -24,7 +24,7 @@
             <h2>我的订单</h2>
             <div class="table-responsive">
 
-                <table
+                <table class="text-nowrap"
                         data-toggle="table"
                         data-url="${ctx}/order/manager/list/order/data"
                         data-pagination="true"
@@ -60,7 +60,7 @@
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
         if (row.orderStatus !== 4 && row.orderStatus !== 5 && row.orderStatus !== 3){
-            return "<a href='${ctx}/oper/"+row.id+"/2' class='btn btn-default'><i class='fas fa-times'></i> 取消</a>";
+            return "<a href='${ctx}/oper/"+row.id+"/2' class='btn btn-info'><i class='fas fa-times'></i> 取消</a>";
         }
     }
     function orderstatusFormatter(value, row, index) {

@@ -49,6 +49,7 @@ public class OrderController {
     }
 
     @GetMapping(value = "oper/{id}/{code}")
+    @ResponseBody
     public boolean oper(@PathVariable(value = "code") int code,
                         @PathVariable(value = "id") long id) {
         if (1 == code) {
