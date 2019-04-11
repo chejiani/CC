@@ -6,7 +6,6 @@ import edu.jxau.cjn.infrastructure.repositories.GoodsRepository;
 import edu.jxau.cjn.infrastructure.repositories.OrderRepository;
 import edu.jxau.cjn.infrastructure.repositories.UserRepository;
 import edu.jxau.cjn.service.Log;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +14,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -124,6 +122,7 @@ public class OrderService implements Log {
         order.setAddress(address);
         Optional<Order> optionalOrder = orderRepository.findById(order.getId());
         if (!optionalOrder.isPresent()){
+            order.setOrderStatus(OrderStatus.WAIT_SHIP.getCode());
             createOrder(order, goodsId, userId);
         } else {
             order = optionalOrder.get();
