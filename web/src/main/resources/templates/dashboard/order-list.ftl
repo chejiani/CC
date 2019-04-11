@@ -60,7 +60,7 @@
 <script type="application/javascript">
     function operateFormatter(value, row, index) {
         if (row.orderStatus !== 4 && row.orderStatus !== 5 && row.orderStatus !== 3){
-            return "<a href='${ctx}/oper/"+row.id+"/2' class='btn btn-info'><i class='fas fa-times'></i> 取消</a>";
+            return "<a href='#' class='btn btn-danger' onclick='doCancel("+row.id+")'><i class='fas fa-eye'></i> 取消</a>";
         }
     }
     function orderstatusFormatter(value, row, index) {
@@ -80,6 +80,12 @@
             default:
                 return '交易处理中';
         }
+    }
+    function doCancel(obj) {
+        $.get("${ctx}/order/oper/" + obj + "/2", function () {
+            alert('订单已经取消');
+            window.location.reload();
+        })
     }
 </script>
 </html>
